@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chef Martin — Voice</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@11labs/client@latest/dist/index.umd.js"></script>
+<style>
+:root {
+  --ink:      #15100C;
+  --cream:    #F6F0E2;
+  --warm:     #FBF7EE;
+  --terra:    #B84E20;
+  --terra-l:  #D96A38;
+  --terra-p:  rgba(184,78,32,0.08);
+  --forest:   #1E3D28;
+  --forest-m: #2E6040;
+  --forest-p: rgba(30,61,40,0.07);
+  --gold:     #C08A18;
+  --gold-l:   #E0A820;
+  --slate:    #54606E;
+  --border:   rgba(184,78,32,0.13);
+  --shadow:   0 4px 24px rgba(21,16,12,0.09);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{height:100%;}
+body{
+  font-family:'Jost',sans-serif;
+  background:var(--cream);color:var(--ink);
+  height:100dvh;display:flex;flex-direction:column;
+  overflow:hidden;
+}
+body::after{
+  content:'';position:fixed;inset:0;
+  background-image:radial-gradient(circle,rgba(0,0,0,0.04) 1px,transparent 1px);
+  background-size:5px 5px;pointer-events:none;z-index:0;mix-blend-mode:multiply;
+}
+
+/* HEADER */
+.header{
+  background:linear-gradient(160deg,#0F1F14,#1E3D28,#0A1410);
+  padding:14px 18px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-shrink:0;position:relative;z-index:10;
+}
+.header::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(192,138,24,0.3),transparent);
+}
+.hdr-left{display:flex;align-items:center;gap:11px;}
+.avatar-wrap{position:relative;flex-shrink:0;}
+.avatar{
+  width:44px;height:44px;border-radius:50%;
+  background:linear-gradient(135deg,#2E6040,#1E3D28);
+  border:2px solid rgba(192,138,24,0.35);
+  display:flex;align-items:center;justify-content:center;font-size:22px;
+}
+.status-dot{
+  position:absolute;bottom:1px;right:1px;
+  width:11px;height:11px;border-radius:50%;
+  background:#44CC66;border:2px solid #1E3D28;transition:all 0.3s;
+}
+.status-dot.speaking{
+  background:var(--gold-l);
+  animation:pulse-dot 1s ease-in-out infinite;
+}
+.status-dot.listening{
+  background:#4488FF;
+  animation:pulse-dot 0.7s ease-in-out infinite;
+}
+@keyframes pulse-dot{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.4);opacity:0.7;}}
+.hdr-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.05rem;font-weight:600;color:white;font-style:italic;
+}
+.hdr-status{font-size:0.62rem;color:rgba(255,255,255,0.42);letter-spacing:0.06em;margin-top:2px;}
+
+.lang-toggle{
+  display:flex;background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.12);border-radius:99px;overflow:hidden;
+}
+.lang-btn{
+  padding:5px 12px;font-family:'Jost',sans-serif;
+  font-size:0.65rem;font-weight:700;letter-spacing:0.08em;
+  color:rgba(255,255,255,0.45);background:none;border:none;
+  cursor:pointer;transition:all 0.2s;text-transform:uppercase;
+}
+.lang-btn.active{background:rgba(192,138,24,0.25);color:var(--gold-l);}
+
+/* AUDIO BAR */
+.audio-bar{height:3px;background:var(--border);flex-shrink:0;position:relative;overflow:hidden;}
+.audio-bar-fill{
+  height:100%;border-radius:0 99px 99px 0;width:0%;
+  background:linear-gradient(90deg,var(--terra),var(--gold-l),var(--forest-m));
+  transition:width 0.1s ease;
+}
+
+/* MAIN AREA */
+.main{
+  flex:1;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:24px 20px;gap:20px;
+  position:relative;z-index:1;overflow:hidden;
+}
+
+/* CONVERSATION DISPLAY */
+.convo-display{
+  width:100%;max-width:480px;
+  background:white;border:1.5px solid var(--border);
+  border-radius:18px;padding:16px;
+  min-height:120px;max-height:300px;
+  overflow-y:auto;
+  display:flex;flex-direction:column;gap:10px;
+  box-shadow:var(--shadow);
+  scrollbar-width:thin;scrollbar-color:var(--border) transparent;
+}
+
+.msg-martin{display:flex;gap:8px;align-items:flex-start;animation:msgIn 0.3s ease both;}
+.msg-user{display:flex;justify-content:flex-end;animation:msgIn 0.3s ease both;}
+@keyframes msgIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+.msg-av{
+  width:28px;height:28px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,var(--forest),var(--forest-m));
+  display:flex;align-items:center;justify-content:center;font-size:13px;
+}
+.msg-bubble{
+  background:var(--warm);border:1.5px solid var(--border);
+  border-radius:4px 14px 14px 14px;
+  padding:9px 13px;max-width:85%;
+  font-size:0.85rem;line-height:1.65;color:var(--ink);
+}
+.msg-bubble strong{color:var(--terra);}
+.msg-user-bubble{
+  background:linear-gradient(135deg,var(--forest),var(--forest-m));
+  border-radius:14px 14px 4px 14px;
+  padding:9px 13px;max-width:80%;
+  font-size:0.85rem;line-height:1.65;color:white;
+}
+
+/* ORBS — the visual heart */
+.orb-container{
+  position:relative;
+  width:160px;height:160px;flex-shrink:0;
+}
+
+.orb-outer{
+  position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#2E6040,#0F1F14);
+  border:2px solid rgba(192,138,24,0.2);
+  display:flex;align-items:center;justify-content:center;
+  transition:all 0.4s ease;
+  box-shadow:0 8px 32px rgba(15,31,20,0.4);
+}
+.orb-outer.speaking{
+  box-shadow:0 0 0 8px rgba(192,138,24,0.08),
+             0 0 0 18px rgba(192,138,24,0.04),
+             0 8px 32px rgba(15,31,20,0.4);
+  animation:orb-speak 1.5s ease-in-out infinite;
+}
+.orb-outer.listening{
+  box-shadow:0 0 0 8px rgba(68,136,255,0.1),
+             0 0 0 18px rgba(68,136,255,0.05),
+             0 8px 32px rgba(15,31,20,0.4);
+  animation:orb-listen 0.8s ease-in-out infinite;
+}
+@keyframes orb-speak{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.04);}
+}
+@keyframes orb-listen{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.02);}
+}
+
+.orb-em{
+  font-size:52px;
+  filter:drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+  transition:all 0.3s;
+}
+
+/* Sound waves */
+.waves{
+  position:absolute;inset:-20px;
+  display:flex;align-items:center;justify-content:center;
+  pointer-events:none;opacity:0;transition:opacity 0.3s;
+}
+.waves.active{opacity:1;}
+.wave{
+  position:absolute;border-radius:50%;
+  border:1.5px solid rgba(192,138,24,0.3);
+  animation:wave-expand 2s ease-out infinite;
+}
+.wave:nth-child(1){width:180px;height:180px;}
+.wave:nth-child(2){width:210px;height:210px;animation-delay:0.5s;}
+.wave:nth-child(3){width:240px;height:240px;animation-delay:1s;}
+@keyframes wave-expand{
+  0%{transform:scale(0.8);opacity:0.6;}
+  100%{transform:scale(1.1);opacity:0;}
+}
+
+/* CONTROLS */
+.controls{display:flex;flex-direction:column;align-items:center;gap:12px;width:100%;max-width:320px;}
+
+.call-btn{
+  width:72px;height:72px;border-radius:50%;border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;font-size:28px;
+  transition:all 0.25s;position:relative;
+  box-shadow:0 6px 24px rgba(0,0,0,0.2);
+}
+.call-btn.start{
+  background:linear-gradient(135deg,var(--terra),var(--terra-l));
+  box-shadow:0 6px 24px rgba(184,78,32,0.4);
+}
+.call-btn.start:hover{transform:scale(1.08);}
+.call-btn.end{
+  background:linear-gradient(135deg,#CC2222,#EE4444);
+  box-shadow:0 6px 24px rgba(204,34,34,0.4);
+}
+.call-btn.end:hover{transform:scale(1.08);}
+.call-btn.connecting{
+  background:linear-gradient(135deg,var(--forest),var(--forest-m));
+  animation:connecting-pulse 1s ease-in-out infinite;
+}
+@keyframes connecting-pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.05);}}
+
+.call-label{
+  font-size:0.72rem;font-weight:600;color:var(--slate);
+  letter-spacing:0.06em;text-transform:uppercase;
+}
+
+/* Text input fallback */
+.text-input-row{
+  display:flex;gap:8px;width:100%;
+}
+.text-input{
+  flex:1;background:white;border:1.5px solid var(--border);
+  border-radius:12px;padding:10px 14px;
+  font-family:'Jost',sans-serif;font-size:0.85rem;
+  color:var(--ink);outline:none;transition:border-color 0.2s;
+}
+.text-input:focus{border-color:var(--terra);}
+.text-input::placeholder{color:rgba(84,96,110,0.4);}
+.text-send{
+  width:44px;height:44px;border-radius:12px;
+  background:linear-gradient(135deg,var(--terra),var(--terra-l));
+  border:none;cursor:pointer;font-size:18px;color:white;
+  box-shadow:0 3px 12px rgba(184,78,32,0.3);transition:all 0.2s;flex-shrink:0;
+}
+.text-send:hover{transform:scale(1.05);}
+
+.mode-toggle{
+  font-size:0.68rem;color:rgba(84,96,110,0.5);
+  cursor:pointer;text-decoration:underline;
+  transition:color 0.2s;
+}
+.mode-toggle:hover{color:var(--terra);}
+
+/* Status message */
+.status-msg{
+  font-family:'Cormorant Garamond',serif;
+  font-size:0.95rem;font-style:italic;
+  color:var(--slate);text-align:center;
+  min-height:24px;transition:all 0.3s;
+}
+
+/* TOAST */
+.toast{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
+  background:var(--forest);color:white;
+  padding:9px 20px;border-radius:99px;
+  font-size:0.78rem;font-weight:500;
+  z-index:500;white-space:nowrap;
+  animation:toastIn 0.3s ease both;
+  box-shadow:var(--shadow);
+}
+@keyframes toastIn{from{opacity:0;transform:translate(-50%,8px);}to{opacity:1;transform:translate(-50%,0);}}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="hdr-left">
+    <div class="avatar-wrap">
+      <div class="avatar">👨‍🍳</div>
+      <div class="status-dot" id="status-dot"></div>
+    </div>
+    <div>
+      <div class="hdr-name">Chef Martin</div>
+      <div class="hdr-status" id="hdr-status">Ready to talk</div>
+    </div>
+  </div>
+  <div class="lang-toggle">
+    <button class="lang-btn active" id="lang-en" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" id="lang-es" onclick="setLang('es')">ES</button>
+  </div>
+</div>
+
+<div class="audio-bar"><div class="audio-bar-fill" id="audio-fill"></div></div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- Conversation display -->
+  <div class="convo-display" id="convo">
+    <div class="msg-martin">
+      <div class="msg-av">👨‍🍳</div>
+      <div class="msg-bubble" id="welcome-msg">Hello. I'm Martin — chef, father of four, and your family's kitchen guide. Tap the button below to start talking, or type a message.</div>
+    </div>
+  </div>
+
+  <!-- Orb -->
+  <div class="orb-container">
+    <div class="waves" id="waves">
+      <div class="wave"></div>
+      <div class="wave"></div>
+      <div class="wave"></div>
+    </div>
+    <div class="orb-outer" id="orb">
+      <span class="orb-em" id="orb-em">👨‍🍳</span>
+    </div>
+  </div>
+
+  <div class="status-msg" id="status-msg">Press the button to speak with Martin</div>
+
+  <!-- Controls -->
+  <div class="controls">
+    <!-- Voice call button -->
+    <div style="display:flex;flex-direction:column;align-items:center;gap:6px;" id="voice-controls">
+      <button class="call-btn start" id="call-btn" onclick="toggleCall()">🎙️</button>
+      <div class="call-label" id="call-label">Start talking</div>
+    </div>
+
+    <!-- Text fallback -->
+    <div class="text-input-row" id="text-row" style="display:none;">
+      <input class="text-input" id="text-input" placeholder="Or type to Martin..."
+        onkeydown="if(event.key==='Enter')sendText()">
+      <button class="text-send" onclick="sendText()">→</button>
+    </div>
+
+    <div class="mode-toggle" onclick="toggleMode()" id="mode-toggle">Switch to text mode</div>
+  </div>
+
+</div>
+
+<script>
+// ═══════════════════════════════════════════
+// CONFIG
+// ═══════════════════════════════════════════
+const AGENT_ID = 'agent_4801kjrf5gp8fhkrzyacp6g47ktx';
+let LANG = localStorage.getItem('cm_lang') || 'en';
+let conversation = null;
+let callActive = false;
+let textMode = false;
+let audioProgress = 0;
+let audioInterval = null;
+
+// ═══════════════════════════════════════════
+// ELEVENLABS CONVERSATIONAL AI
+// ═══════════════════════════════════════════
+async function toggleCall() {
+  if (callActive) {
+    await endCall();
+  } else {
+    await startCall();
+  }
+}
+
+async function startCall() {
+  const btn = document.getElementById('call-btn');
+  const label = document.getElementById('call-label');
+
+  // Request mic permission
+  try {
+    await navigator.mediaDevices.getUserMedia({ audio: true });
+  } catch(e) {
+    showToast('🎙️ Microphone permission needed');
+    return;
+  }
+
+  // Connecting state
+  btn.className = 'call-btn connecting';
+  btn.textContent = '⏳';
+  label.textContent = 'Connecting...';
+  setStatus('Connecting to Martin...', 'idle');
+
+  try {
+    conversation = await ElevenLabsClient.Conversation.startSession({
+      agentId: AGENT_ID,
+
+      onConnect: () => {
+        callActive = true;
+        btn.className = 'call-btn end';
+        btn.textContent = '📵';
+        label.textContent = 'Tap to end';
+        setStatus('Martin is listening...', 'listening');
+        startAudioProgress();
+      },
+
+      onDisconnect: () => {
+        callActive = false;
+        btn.className = 'call-btn start';
+        btn.textContent = '🎙️';
+        label.textContent = 'Start talking';
+        setStatus('Press the button to speak with Martin', 'idle');
+        stopAudioProgress();
+      },
+
+      onError: (error) => {
+        console.error('Conversation error:', error);
+        showToast('Connection error — try text mode');
+        callActive = false;
+        btn.className = 'call-btn start';
+        btn.textContent = '🎙️';
+        label.textContent = 'Start talking';
+        setStatus('Press the button to speak with Martin', 'idle');
+        stopAudioProgress();
+      },
+
+      onModeChange: (mode) => {
+        if (mode.mode === 'speaking') {
+          setStatus('Martin is speaking...', 'speaking');
+        } else if (mode.mode === 'listening') {
+          setStatus('Martin is listening...', 'listening');
+        } else {
+          setStatus('Connected...', 'idle');
+        }
+      },
+
+      onMessage: (message) => {
+        if (message.source === 'ai') {
+          addMessage('martin', message.message);
+        } else if (message.source === 'user') {
+          addMessage('user', message.message);
+        }
+      },
+    });
+
+  } catch(err) {
+    console.error('Failed to start:', err);
+    showToast('Could not connect — try text mode');
+    btn.className = 'call-btn start';
+    btn.textContent = '🎙️';
+    label.textContent = 'Start talking';
+    setStatus('Press the button to speak with Martin', 'idle');
+  }
+}
+
+async function endCall() {
+  if (conversation) {
+    await conversation.endSession();
+    conversation = null;
+  }
+}
+
+// ═══════════════════════════════════════════
+// TEXT MODE (fallback using Anthropic)
+// ═══════════════════════════════════════════
+const ANTHROPIC_KEY = localStorage.getItem('cm_anthropic') || '';
+
+async function sendText() {
+  const input = document.getElementById('text-input');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+
+  addMessage('user', text);
+  setStatus('Martin is thinking...', 'idle');
+
+  if (!ANTHROPIC_KEY) {
+    addMessage('martin', 'To use text mode, add your Anthropic API key. Or use voice mode above — no key needed!');
+    setStatus('Voice mode recommended', 'idle');
+    return;
+  }
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': ANTHROPIC_KEY,
+        'anthropic-version': '2023-06-01'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 300,
+        system: `You are Chef Martin Goldman — 30 years as a professional chef, father of four, son of a doctor. Mediterranean philosophy, Irish depth. Warm, direct, occasionally witty. Gut first, food before supplements, joy non-negotiable. One question at a time. Under 80 words. Natural sentences, no bullet points. ${LANG === 'es' ? 'Respond in Spanish.' : 'Respond in English.'}`,
+        messages: [{ role: 'user', content: text }]
+      })
+    });
+    const data = await res.json();
+    const reply = data.content?.[0]?.text || '...';
+    addMessage('martin', reply);
+    setStatus('', 'idle');
+  } catch(err) {
+    addMessage('martin', 'Something went wrong — try again in a moment.');
+    setStatus('', 'idle');
+  }
+}
+
+// ═══════════════════════════════════════════
+// UI HELPERS
+// ═══════════════════════════════════════════
+function addMessage(from, text) {
+  const convo = document.getElementById('convo');
+
+  // Remove welcome message on first real message
+  const welcome = document.getElementById('welcome-msg');
+  if (welcome && welcome.parentElement) {
+    welcome.parentElement.remove();
+  }
+
+  const div = document.createElement('div');
+  if (from === 'martin') {
+    div.className = 'msg-martin';
+    div.innerHTML = `<div class="msg-av">👨‍🍳</div><div class="msg-bubble">${text}</div>`;
+  } else {
+    div.className = 'msg-user';
+    div.innerHTML = `<div class="msg-user-bubble">${text}</div>`;
+  }
+  convo.appendChild(div);
+  convo.scrollTop = convo.scrollHeight;
+}
+
+function setStatus(text, mode) {
+  document.getElementById('status-msg').textContent = text;
+  document.getElementById('hdr-status').textContent = text || 'Ready to talk';
+
+  const dot = document.getElementById('status-dot');
+  const orb = document.getElementById('orb');
+  const waves = document.getElementById('waves');
+  const orbEm = document.getElementById('orb-em');
+
+  dot.className = 'status-dot';
+  orb.className = 'orb-outer';
+  waves.className = 'waves';
+
+  if (mode === 'speaking') {
+    dot.classList.add('speaking');
+    orb.classList.add('speaking');
+    waves.classList.add('active');
+    orbEm.textContent = '🗣️';
+  } else if (mode === 'listening') {
+    dot.classList.add('listening');
+    orb.classList.add('listening');
+    orbEm.textContent = '👂';
+  } else {
+    orbEm.textContent = callActive ? '✅' : '👨‍🍳';
+  }
+}
+
+function startAudioProgress() {
+  audioProgress = 0;
+  audioInterval = setInterval(() => {
+    audioProgress = (audioProgress + 1) % 100;
+    document.getElementById('audio-fill').style.width = audioProgress + '%';
+  }, 50);
+}
+
+function stopAudioProgress() {
+  clearInterval(audioInterval);
+  document.getElementById('audio-fill').style.width = '0%';
+}
+
+function toggleMode() {
+  textMode = !textMode;
+  document.getElementById('text-row').style.display = textMode ? 'flex' : 'none';
+  document.getElementById('voice-controls').style.display = textMode ? 'none' : 'flex';
+  document.getElementById('mode-toggle').textContent = textMode ? 'Switch to voice mode' : 'Switch to text mode';
+}
+
+function setLang(lang) {
+  LANG = lang;
+  localStorage.setItem('cm_lang', lang);
+  document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+  document.getElementById('lang-es').classList.toggle('active', lang === 'es');
+  const msg = document.getElementById('welcome-msg');
+  if (msg) {
+    msg.textContent = lang === 'es'
+      ? 'Hola. Soy Martín — chef, padre de cuatro, y tu guía en la cocina familiar. Pulsa el botón para hablar, o escribe un mensaje.'
+      : 'Hello. I\'m Martin — chef, father of four, and your family\'s kitchen guide. Tap the button below to start talking, or type a message.';
+  }
+}
+
+function showToast(msg) {
+  document.querySelectorAll('.toast').forEach(t => t.remove());
+  const t = document.createElement('div');
+  t.className = 'toast'; t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 3000);
+}
+
+// ═══════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════
+
+// Check if ElevenLabs SDK loaded
+window.onload = () => {
+  if (typeof ElevenLabsClient === 'undefined') {
+    showToast('Voice loading... try text mode if needed');
+    document.getElementById('mode-toggle').textContent = 'Switch to text mode';
+  }
+};
+</script>
+</body>
+</html>

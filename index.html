@@ -1049,7 +1049,7 @@ function calcUpdate() {
 // ═══════════════════════════════════════════
 // EMAIL SIGNUP
 // ═══════════════════════════════════════════
-function submitEmail() {
+async function submitEmail() {
   const email = document.getElementById('email-input').value.trim();
   if (!email || !email.includes('@')) {
     document.getElementById('email-input').style.borderColor = '#CC3333';
@@ -1058,24 +1058,50 @@ function submitEmail() {
     return;
   }
 
-  // Store locally (in real deployment: POST to your backend/Mailchimp/Airtable)
-  const signups = JSON.parse(localStorage.getItem('cm_signups') || '[]');
-  signups.push({ email, date: new Date().toISOString() });
-  localStorage.setItem('cm_signups', JSON.stringify(signups));
+  const btn = document.querySelector('.btn-signup');
+  btn.textContent = 'Sending...';
+  btn.style.opacity = '0.7';
+  btn.disabled = true;
 
-  // Update spots
-  const remaining = Math.max(0, 10 - signups.length);
-  document.getElementById('spots-text').textContent =
-    remaining > 0
-      ? `${remaining} of 10 founding spots remaining`
-      : 'All founding spots claimed — join the waitlist';
+  try {
+    const res = await fetch('https://formspree.io/f/mdalrdpj', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        email,
+        message: 'New founding family signup from Chef Martin landing page',
+        date: new Date().toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' })
+      })
+    });
 
-  // Show success
-  document.getElementById('form-wrap').style.display = 'none';
-  document.getElementById('success-msg').classList.add('show');
+    if (!res.ok) throw new Error('Formspree error');
 
-  // Scroll to success
-  document.getElementById('success-msg').scrollIntoView({ behavior:'smooth', block:'center' });
+    const signups = JSON.parse(localStorage.getItem('cm_signups') || '[]');
+    signups.push({ email, date: new Date().toISOString() });
+    localStorage.setItem('cm_signups', JSON.stringify(signups));
+
+    const remaining = Math.max(0, 10 - signups.length);
+    document.getElementById('spots-text').textContent =
+      remaining > 0
+        ? `${remaining} of 10 founding spots remaining`
+        : 'All founding spots claimed — join the waitlist';
+
+    document.getElementById('form-wrap').style.display = 'none';
+    document.getElementById('success-msg').classList.add('show');
+    document.getElementById('success-msg').scrollIntoView({ behavior:'smooth', block:'center' });
+
+  } catch(err) {
+    console.error('Formspree error:', err);
+    btn.textContent = 'CLAIM MY FREE MONTH →';
+    btn.style.opacity = '1';
+    btn.disabled = false;
+    document.getElementById('email-input').style.borderColor = '#CC3333';
+    document.getElementById('email-input').placeholder = 'Something went wrong — try WhatsApp instead';
+    setTimeout(() => {
+      document.getElementById('email-input').style.borderColor = '';
+      document.getElementById('email-input').placeholder = 'Your email address';
+    }, 3000);
+  }
 }
 
 // ═══════════════════════════════════════════

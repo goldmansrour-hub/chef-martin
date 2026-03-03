@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chef Martin — Voice</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:     #15100C;
+  --cream:   #F6F0E2;
+  --warm:    #FBF7EE;
+  --terra:   #B84E20;
+  --terra-l: #D96A38;
+  --forest:  #1E3D28;
+  --forest-m:#2E6040;
+  --gold:    #C08A18;
+  --gold-l:  #E0A820;
+  --slate:   #54606E;
+  --border:  rgba(184,78,32,0.13);
+  --shadow:  0 4px 24px rgba(21,16,12,0.09);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;}
+body{
+  font-family:'Jost',sans-serif;
+  background:var(--cream);color:var(--ink);
+  min-height:100dvh;display:flex;flex-direction:column;
+}
+body::after{
+  content:'';position:fixed;inset:0;
+  background-image:radial-gradient(circle,rgba(0,0,0,0.04) 1px,transparent 1px);
+  background-size:5px 5px;pointer-events:none;z-index:0;mix-blend-mode:multiply;
+}
+
+/* HEADER */
+.header{
+  background:linear-gradient(160deg,#0F1F14,#1E3D28,#0A1410);
+  padding:14px 18px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-shrink:0;position:relative;z-index:10;
+}
+.header::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(192,138,24,0.3),transparent);
+}
+.hdr-left{display:flex;align-items:center;gap:11px;}
+.avatar{
+  width:44px;height:44px;border-radius:50%;
+  background:linear-gradient(135deg,#2E6040,#1E3D28);
+  border:2px solid rgba(192,138,24,0.35);
+  display:flex;align-items:center;justify-content:center;font-size:22px;
+  flex-shrink:0;
+}
+.hdr-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.05rem;font-weight:600;color:white;font-style:italic;
+}
+.hdr-sub{font-size:0.62rem;color:rgba(255,255,255,0.42);letter-spacing:0.06em;margin-top:2px;}
+
+.lang-toggle{
+  display:flex;background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.12);border-radius:99px;overflow:hidden;
+}
+.lang-btn{
+  padding:5px 12px;font-family:'Jost',sans-serif;
+  font-size:0.65rem;font-weight:700;letter-spacing:0.08em;
+  color:rgba(255,255,255,0.45);background:none;border:none;
+  cursor:pointer;transition:all 0.2s;text-transform:uppercase;
+}
+.lang-btn.active{background:rgba(192,138,24,0.25);color:var(--gold-l);}
+
+/* MAIN */
+.main{
+  flex:1;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:32px 20px;gap:28px;
+  position:relative;z-index:1;
+}
+
+/* INTRO CARD */
+.intro-card{
+  background:white;border:1.5px solid var(--border);
+  border-radius:18px;padding:20px;
+  max-width:420px;width:100%;
+  box-shadow:var(--shadow);
+  text-align:center;
+}
+.intro-em{font-size:40px;margin-bottom:8px;display:block;}
+.intro-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.2rem;font-weight:700;font-style:italic;
+  color:var(--forest);margin-bottom:6px;
+}
+.intro-body{
+  font-size:0.82rem;color:var(--slate);line-height:1.65;
+}
+
+/* ORB */
+.orb-wrap{
+  position:relative;width:140px;height:140px;
+}
+.orb{
+  width:140px;height:140px;border-radius:50%;
+  background:linear-gradient(135deg,#2E6040,#0F1F14);
+  border:2px solid rgba(192,138,24,0.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:48px;
+  box-shadow:0 8px 32px rgba(15,31,20,0.4);
+  animation:orb-breathe 4s ease-in-out infinite;
+}
+@keyframes orb-breathe{
+  0%,100%{box-shadow:0 8px 32px rgba(15,31,20,0.4);}
+  50%{box-shadow:0 8px 48px rgba(15,31,20,0.5),0 0 0 12px rgba(192,138,24,0.05);}
+}
+
+/* ElevenLabs widget container — styled to match our design */
+.widget-wrap{
+  max-width:420px;width:100%;
+  display:flex;flex-direction:column;align-items:center;gap:12px;
+}
+
+.widget-label{
+  font-size:0.7rem;color:var(--slate);
+  font-style:italic;text-align:center;line-height:1.5;
+}
+
+/* Override ElevenLabs widget colours to match our palette */
+elevenlabs-convai {
+  --eleven-accent: #B84E20;
+  --eleven-bg: #1E3D28;
+}
+
+/* Footer note */
+.footer-note{
+  font-size:0.65rem;color:rgba(84,96,110,0.45);
+  text-align:center;padding:0 20px 20px;
+  position:relative;z-index:1;line-height:1.6;
+}
+.footer-note a{color:var(--terra);text-decoration:none;}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="hdr-left">
+    <div class="avatar">👨‍🍳</div>
+    <div>
+      <div class="hdr-name">Chef Martin</div>
+      <div class="hdr-sub">Voice · EN & ES</div>
+    </div>
+  </div>
+  <div class="lang-toggle">
+    <button class="lang-btn active" id="lang-en" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" id="lang-es" onclick="setLang('es')">ES</button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <div class="intro-card">
+    <span class="intro-em">👨‍🍳</span>
+    <div class="intro-title">Talk to Chef Martin</div>
+    <div class="intro-body" id="intro-body">
+      Press the microphone button below and start talking. Martin will listen, respond in his voice, and remember what matters for your family. No typing needed.
+    </div>
+  </div>
+
+  <div class="orb-wrap">
+    <div class="orb">🎙️</div>
+  </div>
+
+  <!-- ElevenLabs Official Widget — handles all audio/CORS natively -->
+  <div class="widget-wrap">
+    <elevenlabs-convai agent-id="agent_4801kjrf5gp8fhkrzyacp6g47ktx"></elevenlabs-convai>
+    <div class="widget-label" id="widget-label">
+      Tap the widget button · Allow microphone when asked · Martin will speak
+    </div>
+  </div>
+
+</div>
+
+<div class="footer-note">
+  Chef Martin remembers your family across every conversation. 
+  <a href="index.html">← Back to landing page</a>
+</div>
+
+<!-- ElevenLabs Official Widget Script -->
+<script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+
+<script>
+function setLang(lang) {
+  document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+  document.getElementById('lang-es').classList.toggle('active', lang === 'es');
+  localStorage.setItem('cm_lang', lang);
+
+  document.getElementById('intro-body').textContent = lang === 'es'
+    ? 'Pulsa el botón del micrófono y empieza a hablar. Martín escuchará, responderá con su voz y recordará lo que importa para tu familia. Sin necesidad de escribir.'
+    : 'Press the microphone button below and start talking. Martin will listen, respond in his voice, and remember what matters for your family. No typing needed.';
+
+  document.getElementById('widget-label').textContent = lang === 'es'
+    ? 'Toca el botón · Permite el micrófono · Martín hablará'
+    : 'Tap the widget button · Allow microphone when asked · Martin will speak';
+}
+
+// Restore language preference
+const savedLang = localStorage.getItem('cm_lang');
+if (savedLang === 'es') setLang('es');
+</script>
+
+</body>
+</html>

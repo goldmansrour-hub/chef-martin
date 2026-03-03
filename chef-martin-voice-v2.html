@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Chef Martin — Voice</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@11labs/client@latest/dist/index.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@elevenlabs/client@latest/dist/index.umd.js"></script>
 <style>
 :root {
   --ink:      #15100C;
@@ -387,8 +387,9 @@ async function startCall() {
   setStatus('Connecting to Martin...', 'idle');
 
   try {
-    conversation = await ElevenLabsClient.Conversation.startSession({
+    conversation = await Conversation.startSession({
       agentId: AGENT_ID,
+      connectionType: 'webrtc',
 
       onConnect: () => {
         callActive = true;
@@ -598,7 +599,7 @@ function showToast(msg) {
 
 // Check if ElevenLabs SDK loaded
 window.onload = () => {
-  if (typeof ElevenLabsClient === 'undefined') {
+  if (typeof Conversation === 'undefined') {
     showToast('Voice loading... try text mode if needed');
     document.getElementById('mode-toggle').textContent = 'Switch to text mode';
   }

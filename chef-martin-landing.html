@@ -693,22 +693,22 @@ footer p{
         <span class="stat-lbl">Years cooking</span>
       </div>
       <div class="stat">
-        <span class="stat-val">€0</span>
+        <span class="stat-val">£0</span>
         <span class="stat-lbl">First month</span>
       </div>
       <div class="stat">
-        <span class="stat-val">€9</span>
+        <span class="stat-val">£9</span>
         <span class="stat-lbl">Then forever</span>
       </div>
       <div class="stat">
-        <span class="stat-val" id="hero-saving">€120</span>
+        <span class="stat-val" id="hero-saving">£120</span>
         <span class="stat-lbl">Avg monthly saving</span>
       </div>
     </div>
 
     <div class="hero-cta">
       <div class="cta-row">
-        <a href="#signup" class="btn-primary">
+        <a href="chef-martin-payment.html" class="btn-primary">
           Claim your free month →
         </a>
         <a href="https://wa.me/447864373114?text=Hi%20Chef%20Martin%2C%20I%27d%20like%20to%20join%20as%20a%20founding%20family"
@@ -716,7 +716,7 @@ footer p{
           💬 WhatsApp Martin
         </a>
       </div>
-      <p class="hero-note">First month free · Then €9/month · Cancel anytime · Founding rate locked forever</p>
+      <p class="hero-note">First month free · Then £9/month · Cancel anytime · Founding rate locked forever</p>
     </div>
   </div>
 
@@ -844,7 +844,7 @@ footer p{
     <div class="slider-group">
       <div class="slider-label">
         <span>Weekly grocery spend</span>
-        <span class="slider-val">€<span id="cv-spend">150</span></span>
+        <span class="slider-val">£<span id="cv-spend">150</span></span>
       </div>
       <input type="range" min="60" max="400" value="150" step="10" id="c-spend" oninput="calcUpdate()">
     </div>
@@ -868,22 +868,22 @@ footer p{
     <div class="calc-result">
       <div class="cr-row">
         <span>Current weekly spend</span>
-        <span class="cr-val">€<span id="r-spend">150</span></span>
+        <span class="cr-val">£<span id="r-spend">150</span></span>
       </div>
       <div class="cr-row">
         <span>Waste reduction (monthly)</span>
-        <span class="cr-val save">−€<span id="r-waste">97</span>/mo</span>
+        <span class="cr-val save">−£<span id="r-waste">97</span>/mo</span>
       </div>
       <div class="cr-row">
         <span>Smarter planning (monthly)</span>
-        <span class="cr-val save">−€<span id="r-plan">32</span>/mo</span>
+        <span class="cr-val save">−£<span id="r-plan">32</span>/mo</span>
       </div>
       <div class="cr-net">
         <span class="cr-net-label">Monthly net saving</span>
-        <span class="cr-net-val">€<span id="r-net">120</span></span>
+        <span class="cr-net-val">£<span id="r-net">120</span></span>
       </div>
       <div class="cr-verdict" id="r-verdict">
-        Weekly saving: €35 × 4.3 weeks = €150/month gross. Minus €9 sub = €120 net saving every month.
+        Weekly saving: £35 × 4.3 weeks = £150/month gross. Minus £9 sub = £120 net saving every month.
       </div>
     </div>
   </div>
@@ -957,7 +957,7 @@ footer p{
       <span class="price-free">FREE</span>
       <div class="price-then">
         First month completely free —
-        <strong>then €9/month forever</strong>
+        <strong>then £9/month forever</strong>
       </div>
       <div class="price-lock">🔒 Your rate locked in permanently</div>
     </div>
@@ -967,7 +967,7 @@ footer p{
         <input class="email-input" type="email" id="email-input"
           placeholder="Your email address"
           onkeydown="if(event.key==='Enter')submitEmail()">
-        <button class="btn-signup" onclick="submitEmail()">
+        <button class="btn-signup" onclick="window.location='chef-martin-payment.html'">
           CLAIM MY FREE MONTH →
         </button>
       </div>
@@ -986,7 +986,7 @@ footer p{
       <div class="sm-title">You're in. Welcome to the family.</div>
       <div class="sm-body">
         Martin will be in touch within 24 hours.<br>
-        Your founding rate of €9/month is locked — forever.<br>
+        Your founding rate of £9/month is locked — forever.<br>
         First month is completely on us.
       </div>
     </div>
@@ -1040,10 +1040,10 @@ function calcUpdate() {
   document.getElementById('r-plan').textContent   = planMonth;
   document.getElementById('r-net').textContent    = net;
   document.getElementById('r-verdict').textContent =
-    `Weekly saving: €${totalWkSave} × 4.3 weeks = €${grossMonth}/month gross. Minus €9 sub = €${net} net saving every month.`;
+    `Weekly saving: £${totalWkSave} × 4.3 weeks = £${grossMonth}/month gross. Minus £9 sub = £${net} net saving every month.`;
 
   // Update hero saving
-  document.getElementById('hero-saving').textContent = '€' + net;
+  document.getElementById('hero-saving').textContent = '£' + net;
 }
 
 // ═══════════════════════════════════════════

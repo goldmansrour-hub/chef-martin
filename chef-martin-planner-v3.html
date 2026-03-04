@@ -3,178 +3,148 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chef Martin — Your Weekly Plan</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>Chef Martin — Voice</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
   --ink:     #15100C;
   --cream:   #F6F0E2;
   --warm:    #FBF7EE;
-  --parch:   #EDE4CC;
   --terra:   #B84E20;
   --terra-l: #D96A38;
-  --terra-p: rgba(184,78,32,0.07);
   --forest:  #1E3D28;
   --forest-m:#2E6040;
-  --forest-p:rgba(30,61,40,0.08);
   --gold:    #C08A18;
   --gold-l:  #E0A820;
   --slate:   #54606E;
-  --border:  rgba(184,78,32,0.14);
-  --shadow:  0 4px 28px rgba(21,16,12,0.10);
+  --border:  rgba(184,78,32,0.13);
+  --shadow:  0 4px 24px rgba(21,16,12,0.09);
 }
 *{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);min-height:100dvh;}
-body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(circle,rgba(0,0,0,0.04) 1px,transparent 1px);background-size:5px 5px;pointer-events:none;z-index:0;mix-blend-mode:multiply;}
-
-/* HEADER */
-.header{background:linear-gradient(160deg,#0F1F14,#1E3D28);padding:14px 18px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
-.header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(192,138,24,0.35),transparent);}
-.hdr-left{display:flex;align-items:center;gap:10px;}
-.hdr-av{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#2E6040,#1E3D28);border:1.5px solid rgba(192,138,24,0.3);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
-.hdr-name{font-family:'Cormorant Garamond',serif;font-size:0.95rem;font-weight:600;font-style:italic;color:white;}
-.hdr-sub{font-size:0.58rem;color:rgba(255,255,255,0.35);letter-spacing:0.08em;margin-top:1px;}
-.hdr-actions{display:flex;gap:8px;}
-.hdr-btn{padding:6px 12px;border-radius:99px;font-family:'Jost',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.06em;cursor:pointer;border:none;transition:all 0.2s;text-transform:uppercase;}
-.hdr-btn.print{background:rgba(192,138,24,0.15);color:var(--gold-l);border:1px solid rgba(192,138,24,0.2);}
-.hdr-btn.settings{background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.1);}
-
-/* MAIN */
-.main{max-width:640px;margin:0 auto;padding:24px 16px 80px;position:relative;z-index:1;}
-
-/* MARTIN'S LETTER */
-.letter-card{background:white;border:1.5px solid var(--border);border-radius:20px;padding:24px;margin-bottom:20px;box-shadow:var(--shadow);position:relative;overflow:hidden;}
-.letter-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--terra),var(--gold-l),var(--forest-m));}
-.letter-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
-.letter-av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--forest),var(--forest-m));display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
-.letter-from{font-size:0.65rem;color:var(--slate);letter-spacing:0.08em;text-transform:uppercase;}
-.letter-date{font-size:0.65rem;color:rgba(84,96,110,0.5);margin-top:1px;}
-.letter-body{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;color:var(--ink);line-height:1.8;}
-.letter-body strong{font-style:normal;color:var(--forest);}
-.letter-loading{display:flex;gap:5px;align-items:center;padding:8px 0;}
-.letter-loading span{width:7px;height:7px;border-radius:50%;background:var(--slate);opacity:0.3;animation:tdot 1.2s ease-in-out infinite;}
-.letter-loading span:nth-child(2){animation-delay:0.18s;}
-.letter-loading span:nth-child(3){animation-delay:0.36s;}
-@keyframes tdot{0%,60%,100%{transform:translateY(0);opacity:0.3;}30%{transform:translateY(-5px);opacity:1;}}
-
-/* GENERATE BTN */
-.generate-wrap{text-align:center;margin-bottom:24px;}
-.generate-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:linear-gradient(135deg,var(--terra),var(--terra-l));color:white;border:none;border-radius:12px;font-family:'Jost',sans-serif;font-size:0.9rem;font-weight:700;cursor:pointer;box-shadow:0 5px 18px rgba(184,78,32,0.35);transition:all 0.2s;border-bottom:3px solid rgba(0,0,0,0.12);}
-.generate-btn:hover{transform:translateY(-2px);}
-.generate-btn:disabled{opacity:0.6;cursor:not-allowed;transform:none;}
-
-/* WEEK TABS */
-.week-nav{display:flex;gap:6px;margin-bottom:16px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;}
-.week-nav::-webkit-scrollbar{display:none;}
-.day-tab{flex-shrink:0;padding:8px 14px;border-radius:99px;font-size:0.72rem;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:white;color:var(--slate);transition:all 0.2s;white-space:nowrap;}
-.day-tab.active{background:var(--forest);color:white;border-color:var(--forest);}
-.day-tab.has-meals{border-color:var(--terra);color:var(--terra);}
-.day-tab.active.has-meals{background:var(--terra);border-color:var(--terra);color:white;}
-
-/* DAY PANEL */
-.day-panel{display:none;}
-.day-panel.active{display:block;animation:fadeUp 0.3s ease both;}
-@keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
-
-/* MEAL CARD */
-.meal-section{margin-bottom:16px;}
-.meal-type-label{font-size:0.62rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--slate);margin-bottom:8px;display:flex;align-items:center;gap:6px;}
-.meal-type-label::after{content:'';flex:1;height:1px;background:var(--border);}
-
-.meal-card{background:white;border:1.5px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);transition:all 0.2s;cursor:pointer;}
-.meal-card:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(21,16,12,0.13);}
-.meal-card.selected{border-color:var(--forest);box-shadow:0 0 0 3px rgba(30,61,40,0.08);}
-
-.meal-card-inner{display:flex;gap:0;}
-.meal-img{width:90px;height:90px;object-fit:cover;flex-shrink:0;background:var(--parch);}
-.meal-img-placeholder{width:90px;height:90px;flex-shrink:0;background:linear-gradient(135deg,var(--parch),var(--border));display:flex;align-items:center;justify-content:center;font-size:28px;}
-.meal-info{flex:1;padding:12px 14px;display:flex;flex-direction:column;justify-content:space-between;}
-.meal-name{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;color:var(--ink);line-height:1.2;margin-bottom:4px;}
-.meal-meta{display:flex;gap:8px;flex-wrap:wrap;}
-.meal-tag{font-size:0.62rem;font-weight:600;letter-spacing:0.05em;padding:2px 8px;border-radius:99px;background:var(--forest-p);color:var(--forest-m);}
-.meal-tag.time{background:var(--terra-p);color:var(--terra);}
-.meal-time{font-size:0.7rem;color:var(--slate);margin-top:4px;}
-
-.meal-martin-note{padding:10px 14px;background:var(--forest-p);border-top:1px solid rgba(30,61,40,0.1);font-family:'Cormorant Garamond',serif;font-size:0.85rem;font-style:italic;color:var(--forest-m);line-height:1.55;display:none;}
-.meal-card.selected .meal-martin-note{display:block;}
-
-.meal-actions{display:none;padding:10px 14px;border-top:1px solid var(--border);gap:8px;}
-.meal-card.selected .meal-actions{display:flex;}
-.meal-act-btn{flex:1;padding:8px;border-radius:8px;font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:600;cursor:pointer;border:none;transition:all 0.2s;}
-.meal-act-btn.recipe{background:var(--forest);color:white;}
-.meal-act-btn.swap{background:var(--terra-p);color:var(--terra);border:1px solid var(--border);}
-
-/* EMPTY STATE */
-.empty-day{text-align:center;padding:32px 20px;color:var(--slate);}
-.empty-day-em{font-size:40px;margin-bottom:10px;display:block;}
-.empty-day-text{font-size:0.85rem;line-height:1.6;}
-
-/* SHOPPING LIST */
-.shopping-section{margin-top:8px;}
-.section-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;font-style:italic;color:var(--forest);margin-bottom:4px;}
-.section-sub{font-size:0.78rem;color:var(--slate);margin-bottom:14px;line-height:1.5;}
-
-.shop-category{margin-bottom:14px;}
-.shop-cat-title{font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--terra);margin-bottom:6px;display:flex;align-items:center;gap:6px;}
-.shop-cat-title::after{content:'';flex:1;height:1px;background:var(--border);}
-.shop-items{display:flex;flex-direction:column;gap:4px;}
-.shop-item{display:flex;align-items:center;gap:10px;background:white;border:1.5px solid var(--border);border-radius:10px;padding:9px 12px;cursor:pointer;transition:all 0.18s;}
-.shop-item:hover{border-color:var(--forest);}
-.shop-item.checked{background:var(--forest-p);border-color:rgba(30,61,40,0.2);}
-.shop-item.checked .shop-item-name{text-decoration:line-through;color:var(--slate);opacity:0.5;}
-.shop-check{width:20px;height:20px;border-radius:6px;border:2px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.18s;font-size:11px;}
-.shop-item.checked .shop-check{background:var(--forest-m);border-color:var(--forest-m);color:white;}
-.shop-item-name{font-size:0.85rem;color:var(--ink);flex:1;}
-.shop-item-qty{font-size:0.72rem;color:var(--slate);font-weight:600;}
-
-/* RECIPE MODAL */
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(21,16,12,0.65);backdrop-filter:blur(6px);z-index:300;align-items:flex-end;justify-content:center;padding:0;}
-.modal-overlay.show{display:flex;animation:fadeIn 0.2s ease both;}
-@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
-.modal{background:var(--warm);border-radius:24px 24px 0 0;padding:24px 20px 40px;width:100%;max-width:640px;max-height:85vh;overflow-y:auto;animation:slideUp 0.3s cubic-bezier(0.34,1.56,0.64,1) both;}
-@keyframes slideUp{from{transform:translateY(100%);}to{transform:translateY(0);}}
-.modal-handle{width:36px;height:4px;background:var(--border);border-radius:99px;margin:0 auto 18px;}
-.modal-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:var(--forest);margin-bottom:6px;}
-.modal-img{width:100%;height:180px;object-fit:cover;border-radius:14px;margin-bottom:14px;}
-.modal-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
-.modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;background:var(--parch);border:none;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;}
-.modal-section-title{font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--terra);margin:14px 0 8px;}
-.ingredient-list{display:flex;flex-direction:column;gap:4px;}
-.ingredient-item{font-size:0.85rem;color:var(--ink);padding:6px 10px;background:white;border-radius:8px;border:1px solid var(--border);}
-.instruction-list{display:flex;flex-direction:column;gap:8px;}
-.instruction-step{display:flex;gap:10px;font-size:0.85rem;color:var(--ink);line-height:1.6;}
-.step-num{width:22px;height:22px;border-radius:50%;background:var(--forest);color:white;font-size:0.7rem;font-weight:700;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
-
-/* SETTINGS */
-.settings-panel{display:none;position:fixed;inset:0;background:rgba(21,16,12,0.65);backdrop-filter:blur(6px);z-index:200;align-items:center;justify-content:center;padding:20px;}
-.settings-panel.show{display:flex;}
-.settings-box{background:var(--warm);border:1.5px solid var(--border);border-radius:20px;padding:24px;max-width:380px;width:100%;box-shadow:var(--shadow);}
-.settings-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;font-style:italic;color:var(--forest);margin-bottom:4px;}
-.settings-sub{font-size:0.75rem;color:var(--slate);margin-bottom:16px;line-height:1.6;}
-.settings-field{margin-bottom:10px;}
-.settings-label{font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--forest-m);margin-bottom:4px;display:block;}
-.settings-input{width:100%;background:white;border:1.5px solid var(--border);border-radius:10px;padding:10px 13px;font-family:'Jost',sans-serif;font-size:0.85rem;color:var(--ink);outline:none;transition:border-color 0.2s;}
-.settings-input:focus{border-color:var(--terra);}
-.settings-save{width:100%;padding:12px;background:linear-gradient(135deg,var(--forest),var(--forest-m));color:white;border:none;border-radius:10px;font-family:'Jost',sans-serif;font-size:0.88rem;font-weight:600;cursor:pointer;margin-top:4px;}
-
-/* PRINT */
-@media print {
-  .header,.generate-wrap,.week-nav,.meal-actions,.hdr-actions,.settings-panel,.modal-overlay,#martin-nav,.no-print{display:none!important;}
-  body{background:white;}
-  .letter-card,.meal-card,.shop-item{break-inside:avoid;box-shadow:none;border:1px solid #ccc;}
-  .day-panel{display:block!important;}
-  .meal-martin-note{display:block!important;}
+html,body{height:100%;}
+body{
+  font-family:'Jost',sans-serif;
+  background:var(--cream);color:var(--ink);
+  min-height:100dvh;display:flex;flex-direction:column;
+}
+body::after{
+  content:'';position:fixed;inset:0;
+  background-image:radial-gradient(circle,rgba(0,0,0,0.04) 1px,transparent 1px);
+  background-size:5px 5px;pointer-events:none;z-index:0;mix-blend-mode:multiply;
 }
 
-/* NAV */
-#martin-nav{position:fixed;bottom:16px;right:16px;z-index:200;display:flex;flex-direction:column;gap:6px;align-items:flex-end;}
-#martin-nav a{display:flex;align-items:center;gap:6px;background:rgba(30,61,40,0.92);border:1px solid rgba(192,138,24,0.2);border-radius:99px;padding:7px 14px;text-decoration:none;font-size:0.7rem;font-weight:600;color:rgba(255,255,255,0.7);}
-#martin-nav a.active{background:rgba(184,78,32,0.92);color:white;}
+/* HEADER */
+.header{
+  background:linear-gradient(160deg,#0F1F14,#1E3D28,#0A1410);
+  padding:14px 18px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-shrink:0;position:relative;z-index:10;
+}
+.header::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(192,138,24,0.3),transparent);
+}
+.hdr-left{display:flex;align-items:center;gap:11px;}
+.avatar{
+  width:44px;height:44px;border-radius:50%;
+  background:linear-gradient(135deg,#2E6040,#1E3D28);
+  border:2px solid rgba(192,138,24,0.35);
+  display:flex;align-items:center;justify-content:center;font-size:22px;
+  flex-shrink:0;
+}
+.hdr-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.05rem;font-weight:600;color:white;font-style:italic;
+}
+.hdr-sub{font-size:0.62rem;color:rgba(255,255,255,0.42);letter-spacing:0.06em;margin-top:2px;}
 
-/* TOAST */
-.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--forest);color:white;padding:9px 20px;border-radius:99px;font-size:0.78rem;font-weight:500;z-index:500;white-space:nowrap;animation:toastIn 0.3s ease both;box-shadow:var(--shadow);}
-@keyframes toastIn{from{opacity:0;transform:translate(-50%,8px);}to{opacity:1;transform:translate(-50%,0);}}
+.lang-toggle{
+  display:flex;background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.12);border-radius:99px;overflow:hidden;
+}
+.lang-btn{
+  padding:5px 12px;font-family:'Jost',sans-serif;
+  font-size:0.65rem;font-weight:700;letter-spacing:0.08em;
+  color:rgba(255,255,255,0.45);background:none;border:none;
+  cursor:pointer;transition:all 0.2s;text-transform:uppercase;
+}
+.lang-btn.active{background:rgba(192,138,24,0.25);color:var(--gold-l);}
+
+/* MAIN */
+.main{
+  flex:1;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:32px 20px;gap:28px;
+  position:relative;z-index:1;
+}
+
+/* INTRO CARD */
+.intro-card{
+  background:white;border:1.5px solid var(--border);
+  border-radius:18px;padding:20px;
+  max-width:420px;width:100%;
+  box-shadow:var(--shadow);
+  text-align:center;
+}
+.intro-em{font-size:40px;margin-bottom:8px;display:block;}
+.intro-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.2rem;font-weight:700;font-style:italic;
+  color:var(--forest);margin-bottom:6px;
+}
+.intro-body{
+  font-size:0.82rem;color:var(--slate);line-height:1.65;
+}
+
+/* ORB */
+.orb-wrap{
+  position:relative;width:140px;height:140px;
+}
+.orb{
+  width:140px;height:140px;border-radius:50%;
+  background:linear-gradient(135deg,#2E6040,#0F1F14);
+  border:2px solid rgba(192,138,24,0.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:48px;
+  box-shadow:0 8px 32px rgba(15,31,20,0.4);
+  animation:orb-breathe 4s ease-in-out infinite;
+}
+@keyframes orb-breathe{
+  0%,100%{box-shadow:0 8px 32px rgba(15,31,20,0.4);}
+  50%{box-shadow:0 8px 48px rgba(15,31,20,0.5),0 0 0 12px rgba(192,138,24,0.05);}
+}
+
+/* ElevenLabs widget container — styled to match our design */
+.widget-wrap{
+  max-width:420px;width:100%;
+  display:flex;flex-direction:column;align-items:center;gap:12px;
+}
+
+.widget-label{
+  font-size:0.7rem;color:var(--slate);
+  font-style:italic;text-align:center;line-height:1.5;
+}
+
+/* Override ElevenLabs widget colours to match our palette */
+elevenlabs-convai {
+  --eleven-accent: #B84E20;
+  --eleven-bg: #1E3D28;
+}
+
+/* Footer note */
+.footer-note{
+  font-size:0.65rem;color:rgba(84,96,110,0.45);
+  text-align:center;padding:0 20px 100px;
+  position:relative;z-index:1;line-height:1.6;
+}
+.footer-note a{color:var(--terra);text-decoration:none;}
+
+/* On voice page — move nav to LEFT so it never covers the widget button (bottom-right) */
+#martin-nav{
+  left:16px !important;
+  right:auto !important;
+  align-items:flex-start !important;
+}
 </style>
 </head>
 <body>
@@ -182,673 +152,70 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 <!-- HEADER -->
 <div class="header">
   <div class="hdr-left">
-    <div class="hdr-av">👨‍🍳</div>
+    <div class="avatar">👨‍🍳</div>
     <div>
-      <div class="hdr-name">Chef Martin — Weekly Plan</div>
-      <div class="hdr-sub" id="hdr-family">Loading your family...</div>
+      <div class="hdr-name">Chef Martin</div>
+      <div class="hdr-sub">Voice · EN & ES</div>
     </div>
   </div>
-  <div class="hdr-actions">
-    <button class="hdr-btn print no-print" onclick="window.print()">🖨️ Print</button>
-    <button class="hdr-btn settings no-print" onclick="openSettings()">⚙️</button>
+  <div class="lang-toggle">
+    <button class="lang-btn active" id="lang-en" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" id="lang-es" onclick="setLang('es')">ES</button>
   </div>
 </div>
 
-<!-- SETTINGS -->
-<div class="settings-panel" id="settings-panel">
-  <div class="settings-box">
-    <div class="settings-title">⚙️ API Configuration</div>
-    <div class="settings-sub">Add your API keys to power the planner. Stored securely in your browser only.</div>
-    <div class="settings-field">
-      <label class="settings-label">Spoonacular API Key</label>
-      <input class="settings-input" id="cfg-spoon" type="password" placeholder="Your Spoonacular key">
-      <div style="font-size:0.65rem;color:var(--slate);margin-top:3px;">Free at spoonacular.com — 150 requests/day</div>
-    </div>
-    <div class="settings-field">
-      <label class="settings-label">Anthropic API Key (for Martin's letter)</label>
-      <input class="settings-input" id="cfg-anthropic" type="password" placeholder="sk-ant-...">
-    </div>
-    <button class="settings-save" onclick="saveSettings()">Save & Generate Plan →</button>
-  </div>
-</div>
-
-<!-- RECIPE MODAL -->
-<div class="modal-overlay" id="modal-overlay" onclick="if(event.target===this)closeModal()">
-  <div class="modal" id="modal-content">
-    <div class="modal-handle"></div>
-    <div id="modal-body"></div>
-  </div>
-</div>
-
+<!-- MAIN -->
 <div class="main">
 
-  <!-- MARTIN'S LETTER -->
-  <div class="letter-card">
-    <div class="letter-header">
-      <div class="letter-av">👨‍🍳</div>
-      <div>
-        <div class="letter-from">Chef Martin · Your Weekly Letter</div>
-        <div class="letter-date" id="letter-date"></div>
-      </div>
-    </div>
-    <div class="letter-body" id="letter-body">
-      <div class="letter-loading"><span></span><span></span><span></span></div>
+  <div class="intro-card">
+    <span class="intro-em">👨‍🍳</span>
+    <div class="intro-title">Talk to Chef Martin</div>
+    <div class="intro-body" id="intro-body">
+      Press the microphone button below and start talking. Martin will listen, respond in his voice, and remember what matters for your family. No typing needed.
     </div>
   </div>
 
-  <!-- GENERATE -->
-  <div class="generate-wrap no-print">
-    <button class="generate-btn" id="generate-btn" onclick="generateWeek()">
-      🌿 Generate this week's plan
-    </button>
+  <div class="orb-wrap">
+    <div class="orb">🎙️</div>
   </div>
 
-  <!-- WEEK TABS -->
-  <div class="week-nav no-print" id="week-nav"></div>
-
-  <!-- DAY PANELS -->
-  <div id="day-panels"></div>
-
-  <!-- SHOPPING LIST -->
-  <div class="shopping-section" id="shopping-section" style="display:none;">
-    <div class="section-title">🛒 Your Shopping List</div>
-    <div class="section-sub" id="shopping-sub">Everything you need for the week — organised by section.</div>
-    <div id="shopping-content"></div>
-    <button class="generate-btn no-print" style="margin-top:12px;font-size:0.8rem;padding:11px 20px;" onclick="shareShoppingList()">
-      📱 Share via WhatsApp
-    </button>
+  <!-- ElevenLabs Official Widget — handles all audio/CORS natively -->
+  <div class="widget-wrap">
+    <elevenlabs-convai agent-id="agent_4801kjrf5gp8fhkrzyacp6g47ktx"></elevenlabs-convai>
+    <div class="widget-label" id="widget-label">
+      Tap the widget button · Allow microphone when asked · Martin will speak
+    </div>
   </div>
 
 </div>
 
-<!-- NAV -->
-<div id="martin-nav">
-  <a href="index.html">🌿 Home</a>
-  <a href="chef-martin-welcome.html">📋 Welcome</a>
-  <a href="chef-martin-voice-v3.html">🎙️ Talk to Martin</a>
+<div class="footer-note">
+  Chef Martin remembers your family across every conversation. 
+  <a href="index.html">← Back to landing page</a>
 </div>
+
+<!-- ElevenLabs Official Widget Script -->
+<script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 
 <script>
-// ═══════════════════════════════════════════
-// CONFIG & STATE
-// ═══════════════════════════════════════════
-let SPOON_KEY = localStorage.getItem('cm_spoon') || '';
-let ANTHROPIC_KEY = localStorage.getItem('cm_anthropic') || '';
-const DAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
-const MEALS = ['Breakfast','Lunch','Dinner'];
-const MEAL_EMOJI = {Breakfast:'🌅',Lunch:'☀️',Dinner:'🌙'};
+function setLang(lang) {
+  document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+  document.getElementById('lang-es').classList.toggle('active', lang === 'es');
+  localStorage.setItem('cm_lang', lang);
 
-let weekPlan = JSON.parse(localStorage.getItem('cm_weekplan') || 'null');
-let shoppingList = [];
-let currentDay = 0;
-let familyData = JSON.parse(localStorage.getItem('chef-martin-family') || '{}');
+  document.getElementById('intro-body').textContent = lang === 'es'
+    ? 'Pulsa el botón del micrófono y empieza a hablar. Martín escuchará, responderá con su voz y recordará lo que importa para tu familia. Sin necesidad de escribir.'
+    : 'Press the microphone button below and start talking. Martin will listen, respond in his voice, and remember what matters for your family. No typing needed.';
 
-// ═══════════════════════════════════════════
-// INIT
-// ═══════════════════════════════════════════
-window.onload = () => {
-  // Set family name in header
-  const fname = familyData.familyName || 'Your Family';
-  document.getElementById('hdr-family').textContent = fname;
-
-  // Set date
-  const now = new Date();
-  document.getElementById('letter-date').textContent =
-    now.toLocaleDateString('en-GB', {weekday:'long', day:'numeric', month:'long', year:'numeric'});
-
-  // Build day tabs
-  buildDayTabs();
-
-  if (weekPlan) {
-    renderWeek(weekPlan);
-    generateMartinLetter();
-  } else {
-    document.getElementById('letter-body').innerHTML =
-      `<em style="color:var(--slate);">Press "Generate this week's plan" and I'll write your family's letter for the week — with a full menu, recipes, and shopping list ready to go. 🌿</em>`;
-    if (!SPOON_KEY) {
-      setTimeout(() => openSettings(), 800);
-    }
-  }
-};
-
-// ═══════════════════════════════════════════
-// SETTINGS
-// ═══════════════════════════════════════════
-function openSettings() {
-  document.getElementById('cfg-spoon').value = SPOON_KEY;
-  document.getElementById('cfg-anthropic').value = ANTHROPIC_KEY;
-  document.getElementById('settings-panel').classList.add('show');
+  document.getElementById('widget-label').textContent = lang === 'es'
+    ? 'Toca el botón · Permite el micrófono · Martín hablará'
+    : 'Tap the widget button · Allow microphone when asked · Martin will speak';
 }
 
-function saveSettings() {
-  SPOON_KEY = document.getElementById('cfg-spoon').value.trim();
-  ANTHROPIC_KEY = document.getElementById('cfg-anthropic').value.trim();
-  localStorage.setItem('cm_spoon', SPOON_KEY);
-  localStorage.setItem('cm_anthropic', ANTHROPIC_KEY);
-  document.getElementById('settings-panel').classList.remove('show');
-  if (SPOON_KEY) generateWeek();
-}
-
-document.getElementById('settings-panel').addEventListener('click', function(e) {
-  if (e.target === this) this.classList.remove('show');
-});
-
-// ═══════════════════════════════════════════
-// BUILD TABS
-// ═══════════════════════════════════════════
-function buildDayTabs() {
-  const nav = document.getElementById('week-nav');
-  const panels = document.getElementById('day-panels');
-  nav.innerHTML = '';
-  panels.innerHTML = '';
-
-  DAYS.forEach((day, i) => {
-    // Tab
-    const tab = document.createElement('div');
-    tab.className = 'day-tab' + (i === 0 ? ' active' : '');
-    tab.textContent = day.substring(0,3);
-    tab.onclick = () => switchDay(i);
-    tab.id = `tab-${i}`;
-    nav.appendChild(tab);
-
-    // Panel
-    const panel = document.createElement('div');
-    panel.className = 'day-panel' + (i === 0 ? ' active' : '');
-    panel.id = `panel-${i}`;
-    panel.innerHTML = `<div class="empty-day"><span class="empty-day-em">🌿</span><div class="empty-day-text">Generate the week's plan<br>to see ${day}'s meals</div></div>`;
-    panels.appendChild(panel);
-  });
-}
-
-function switchDay(i) {
-  document.querySelectorAll('.day-tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.day-panel').forEach(p => p.classList.remove('active'));
-  document.getElementById(`tab-${i}`).classList.add('active');
-  document.getElementById(`panel-${i}`).classList.add('active');
-  currentDay = i;
-}
-
-// ═══════════════════════════════════════════
-// GENERATE WEEK
-// ═══════════════════════════════════════════
-async function generateWeek() {
-  if (!SPOON_KEY) {
-    openSettings();
-    return;
-  }
-
-  const btn = document.getElementById('generate-btn');
-  btn.disabled = true;
-  btn.innerHTML = '⏳ Martin is planning your week...';
-
-  document.getElementById('letter-body').innerHTML =
-    '<div class="letter-loading"><span></span><span></span><span></span></div>';
-
-  try {
-    // Build query from family data
-    const diet = buildDietString();
-    const exclude = buildExcludeString();
-    const plan = {};
-
-    // Generate meals for each day
-    // We batch the requests efficiently
-    const mealTypes = ['breakfast', 'lunch', 'dinner'];
-    const typeMap = {breakfast:'Breakfast', lunch:'Lunch', dinner:'Dinner'};
-
-    for (let d = 0; d < 7; d++) {
-      plan[d] = {};
-      for (const mealType of mealTypes) {
-        try {
-          const recipe = await fetchRecipe(mealType, diet, exclude);
-          if (recipe) plan[d][typeMap[mealType]] = recipe;
-        } catch(e) {
-          console.warn('Recipe fetch failed:', e);
-        }
-        // Small delay to respect rate limits
-        await sleep(200);
-      }
-    }
-
-    weekPlan = plan;
-    localStorage.setItem('cm_weekplan', JSON.stringify(plan));
-    renderWeek(plan);
-    buildShoppingList(plan);
-    await generateMartinLetter();
-
-    btn.disabled = false;
-    btn.innerHTML = '🔄 Regenerate plan';
-    showToast('🌿 Your week is ready!');
-
-  } catch(err) {
-    console.error(err);
-    btn.disabled = false;
-    btn.innerHTML = '🌿 Generate this week\'s plan';
-    document.getElementById('letter-body').innerHTML =
-      `<em style="color:var(--terra);">Something went wrong — check your Spoonacular API key in ⚙️</em>`;
-    showToast('Check your API key in ⚙️');
-  }
-}
-
-async function fetchRecipe(mealType, diet, exclude) {
-  // Map meal type to time
-  const maxTime = mealType === 'breakfast' ? 20 : mealType === 'lunch' ? 35 : 60;
-  const minCal = mealType === 'breakfast' ? 200 : 300;
-  const maxCal = mealType === 'breakfast' ? 500 : mealType === 'lunch' ? 700 : 900;
-
-  // Random offset for variety
-  const offset = Math.floor(Math.random() * 40);
-
-  let url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${SPOON_KEY}`
-    + `&type=${mealType}`
-    + `&maxReadyTime=${maxTime}`
-    + `&minCalories=${minCal}&maxCalories=${maxCal}`
-    + `&number=5&offset=${offset}`
-    + `&addRecipeInformation=true`
-    + `&fillIngredients=true`;
-
-  if (diet) url += `&diet=${diet}`;
-  if (exclude) url += `&excludeIngredients=${exclude}`;
-
-  const res = await fetch(url);
-  const data = await res.json();
-
-  if (data.results && data.results.length > 0) {
-    const recipe = data.results[Math.floor(Math.random() * data.results.length)];
-    return {
-      id: recipe.id,
-      title: recipe.title,
-      image: recipe.image,
-      readyInMinutes: recipe.readyInMinutes,
-      servings: recipe.servings,
-      diets: recipe.diets || [],
-      ingredients: (recipe.extendedIngredients || []).map(i => ({
-        name: i.name,
-        amount: i.amount,
-        unit: i.unit,
-        original: i.original
-      })),
-      instructions: recipe.analyzedInstructions?.[0]?.steps?.map(s => s.step) || [],
-      sourceUrl: recipe.sourceUrl,
-      nutrition: recipe.nutrition?.nutrients?.find(n => n.name === 'Calories')
-    };
-  }
-  return null;
-}
-
-// ═══════════════════════════════════════════
-// RENDER WEEK
-// ═══════════════════════════════════════════
-function renderWeek(plan) {
-  DAYS.forEach((day, i) => {
-    const panel = document.getElementById(`panel-${i}`);
-    const tab = document.getElementById(`tab-${i}`);
-    const dayMeals = plan[i] || {};
-
-    if (Object.keys(dayMeals).length === 0) {
-      panel.innerHTML = `<div class="empty-day"><span class="empty-day-em">🌿</span><div class="empty-day-text">No meals planned for ${day}</div></div>`;
-      return;
-    }
-
-    tab.classList.add('has-meals');
-    let html = '';
-
-    MEALS.forEach(mealType => {
-      const meal = dayMeals[mealType];
-      if (!meal) return;
-
-      const martinNote = getMartinNote(meal, mealType, day);
-      html += `
-        <div class="meal-section">
-          <div class="meal-type-label">${MEAL_EMOJI[mealType]} ${mealType}</div>
-          <div class="meal-card" onclick="toggleMeal(this)" data-id="${meal.id}" data-day="${i}" data-meal="${mealType}">
-            <div class="meal-card-inner">
-              ${meal.image
-                ? `<img class="meal-img" src="${meal.image}" alt="${meal.title}" onerror="this.style.display='none'">`
-                : `<div class="meal-img-placeholder">${MEAL_EMOJI[mealType]}</div>`}
-              <div class="meal-info">
-                <div class="meal-name">${meal.title}</div>
-                <div class="meal-meta">
-                  ${meal.readyInMinutes ? `<span class="meal-tag time">⏱ ${meal.readyInMinutes} min</span>` : ''}
-                  ${meal.servings ? `<span class="meal-tag">👥 ${meal.servings} servings</span>` : ''}
-                  ${meal.diets?.slice(0,1).map(d => `<span class="meal-tag">${d}</span>`).join('') || ''}
-                </div>
-              </div>
-            </div>
-            <div class="meal-martin-note">"${martinNote}"</div>
-            <div class="meal-actions">
-              <button class="meal-act-btn recipe" onclick="openRecipe(${meal.id},event)">📖 Full recipe</button>
-              <button class="meal-act-btn swap" onclick="swapMeal(${i},'${mealType}',event)">🔄 Swap</button>
-            </div>
-          </div>
-        </div>`;
-    });
-
-    panel.innerHTML = html;
-  });
-}
-
-function toggleMeal(el) {
-  el.classList.toggle('selected');
-}
-
-function getMartinNote(meal, mealType, day) {
-  const notes = {
-    Breakfast: [
-      "Start the day from a place of nourishment — this sets the tone for everything that follows.",
-      "A good breakfast is a conversation with the morning. Take your time with it.",
-      "The gut wakes slowly. Give it something warm and real to begin with."
-    ],
-    Lunch: [
-      "Midday is when the body is most ready to receive. Don't waste it on something that barely counts as food.",
-      "A proper lunch is an act of self-respect. Your afternoon will thank you.",
-      "This is the meal most families get wrong. You're getting it right."
-    ],
-    Dinner: [
-      "Dinner is not about fuel — it's about the table. Sit down, everyone together if possible.",
-      "The evening meal should wind the body down, not rev it up. This does that beautifully.",
-      "Cook this with the radio on. Let the kitchen be a place of joy tonight."
-    ]
-  };
-  const arr = notes[mealType];
-  return arr[Math.floor(Math.random() * arr.length)];
-}
-
-// ═══════════════════════════════════════════
-// SWAP MEAL
-// ═══════════════════════════════════════════
-async function swapMeal(dayIdx, mealType, event) {
-  event.stopPropagation();
-  showToast('🔄 Finding a new recipe...');
-
-  try {
-    const diet = buildDietString();
-    const exclude = buildExcludeString();
-    const newRecipe = await fetchRecipe(mealType.toLowerCase(), diet, exclude);
-
-    if (newRecipe) {
-      weekPlan[dayIdx][mealType] = newRecipe;
-      localStorage.setItem('cm_weekplan', JSON.stringify(weekPlan));
-      renderWeek(weekPlan);
-      buildShoppingList(weekPlan);
-      switchDay(dayIdx);
-      showToast('✅ New recipe found!');
-    }
-  } catch(e) {
-    showToast('Could not swap — try again');
-  }
-}
-
-// ═══════════════════════════════════════════
-// RECIPE MODAL
-// ═══════════════════════════════════════════
-async function openRecipe(recipeId, event) {
-  event.stopPropagation();
-  document.getElementById('modal-overlay').classList.add('show');
-  document.getElementById('modal-body').innerHTML =
-    '<div style="text-align:center;padding:40px;"><div class="letter-loading" style="justify-content:center;"><span></span><span></span><span></span></div></div>';
-
-  try {
-    // Find recipe in plan
-    let recipe = null;
-    for (const day of Object.values(weekPlan || {})) {
-      for (const meal of Object.values(day)) {
-        if (meal && meal.id === recipeId) { recipe = meal; break; }
-      }
-      if (recipe) break;
-    }
-
-    if (!recipe) {
-      document.getElementById('modal-body').innerHTML = '<p>Recipe not found</p>';
-      return;
-    }
-
-    const cals = recipe.nutrition ? `${Math.round(recipe.nutrition.amount)} kcal` : '';
-
-    document.getElementById('modal-body').innerHTML = `
-      <button class="modal-close" onclick="closeModal()">✕</button>
-      <div class="modal-title">${recipe.title}</div>
-      ${recipe.image ? `<img class="modal-img" src="${recipe.image}" alt="${recipe.title}">` : ''}
-      <div class="modal-meta">
-        ${recipe.readyInMinutes ? `<span class="meal-tag time">⏱ ${recipe.readyInMinutes} min</span>` : ''}
-        ${recipe.servings ? `<span class="meal-tag">👥 ${recipe.servings} servings</span>` : ''}
-        ${cals ? `<span class="meal-tag">${cals}</span>` : ''}
-        ${(recipe.diets || []).slice(0,2).map(d => `<span class="meal-tag">${d}</span>`).join('')}
-      </div>
-
-      ${recipe.ingredients?.length ? `
-        <div class="modal-section-title">Ingredients</div>
-        <div class="ingredient-list">
-          ${recipe.ingredients.map(i => `<div class="ingredient-item">• ${i.original || i.name}</div>`).join('')}
-        </div>` : ''}
-
-      ${recipe.instructions?.length ? `
-        <div class="modal-section-title">How to make it</div>
-        <div class="instruction-list">
-          ${recipe.instructions.map((step, i) => `
-            <div class="instruction-step">
-              <div class="step-num">${i+1}</div>
-              <div>${step}</div>
-            </div>`).join('')}
-        </div>` : `
-        <div class="modal-section-title">Recipe</div>
-        <p style="font-size:0.85rem;color:var(--slate);line-height:1.6;">
-          ${recipe.sourceUrl
-            ? `Full recipe available at <a href="${recipe.sourceUrl}" target="_blank" style="color:var(--terra);">${new URL(recipe.sourceUrl).hostname}</a>`
-            : 'Full recipe details not available for this meal.'}
-        </p>`}
-    `;
-  } catch(e) {
-    document.getElementById('modal-body').innerHTML = '<p style="color:var(--terra);">Could not load recipe</p>';
-  }
-}
-
-function closeModal() {
-  document.getElementById('modal-overlay').classList.remove('show');
-}
-
-// ═══════════════════════════════════════════
-// SHOPPING LIST
-// ═══════════════════════════════════════════
-function buildShoppingList(plan) {
-  const ingredients = {};
-
-  for (const day of Object.values(plan)) {
-    for (const meal of Object.values(day)) {
-      if (!meal?.ingredients) continue;
-      for (const ing of meal.ingredients) {
-        const key = ing.name.toLowerCase().trim();
-        if (!ingredients[key]) {
-          ingredients[key] = { name: ing.name, amounts: [], category: categorise(ing.name) };
-        }
-        if (ing.amount && ing.unit) {
-          ingredients[key].amounts.push(`${Math.round(ing.amount * 10) / 10} ${ing.unit}`);
-        }
-      }
-    }
-  }
-
-  // Group by category
-  const categories = {};
-  for (const [key, ing] of Object.entries(ingredients)) {
-    if (!categories[ing.category]) categories[ing.category] = [];
-    categories[ing.category].push(ing);
-  }
-
-  shoppingList = categories;
-  renderShoppingList(categories);
-}
-
-function categorise(name) {
-  const n = name.toLowerCase();
-  if (/chicken|beef|pork|fish|salmon|tuna|lamb|turkey|bacon|sausage|meat|shrimp/.test(n)) return '🥩 Meat & Fish';
-  if (/milk|cheese|butter|cream|yogurt|egg/.test(n)) return '🥛 Dairy & Eggs';
-  if (/apple|banana|berry|lemon|orange|grape|tomato|avocado|strawberry|blueberry/.test(n)) return '🍎 Fruit';
-  if (/carrot|onion|garlic|pepper|broccoli|spinach|lettuce|potato|mushroom|celery|courgette|cucumber/.test(n)) return '🥦 Vegetables';
-  if (/flour|bread|pasta|rice|oat|quinoa|noodle/.test(n)) return '🌾 Grains & Bread';
-  if (/oil|vinegar|sauce|honey|syrup|salt|pepper|spice|herb|basil|oregano|thyme|cumin/.test(n)) return '🫙 Pantry & Spices';
-  if (/juice|water|stock|broth|wine|coconut milk/.test(n)) return '🧃 Liquids';
-  return '🛒 Other';
-}
-
-function renderShoppingList(categories) {
-  const section = document.getElementById('shopping-section');
-  const content = document.getElementById('shopping-content');
-  const total = Object.values(categories).reduce((s, items) => s + items.length, 0);
-
-  document.getElementById('shopping-sub').textContent =
-    `${total} items for the week — organised by section. Tap to check off as you shop.`;
-
-  content.innerHTML = Object.entries(categories)
-    .sort(([a],[b]) => a.localeCompare(b))
-    .map(([cat, items]) => `
-      <div class="shop-category">
-        <div class="shop-cat-title">${cat}</div>
-        <div class="shop-items">
-          ${items.map(item => `
-            <div class="shop-item" onclick="toggleShopItem(this)">
-              <div class="shop-check"></div>
-              <div class="shop-item-name">${item.name}</div>
-              ${item.amounts.length ? `<div class="shop-item-qty">${[...new Set(item.amounts)].slice(0,2).join(', ')}</div>` : ''}
-            </div>`).join('')}
-        </div>
-      </div>`).join('');
-
-  section.style.display = 'block';
-}
-
-function toggleShopItem(el) {
-  el.classList.toggle('checked');
-  const check = el.querySelector('.shop-check');
-  check.textContent = el.classList.contains('checked') ? '✓' : '';
-}
-
-function shareShoppingList() {
-  let text = `🛒 *Chef Martin's Shopping List*\n\n`;
-  for (const [cat, items] of Object.entries(shoppingList)) {
-    text += `*${cat}*\n`;
-    items.forEach(i => { text += `• ${i.name}\n`; });
-    text += '\n';
-  }
-  text += `_Generated by Chef Martin 🌿_`;
-  const encoded = encodeURIComponent(text);
-  window.open(`https://wa.me/?text=${encoded}`, '_blank');
-}
-
-// ═══════════════════════════════════════════
-// MARTIN'S LETTER (AI generated)
-// ═══════════════════════════════════════════
-async function generateMartinLetter() {
-  const letterEl = document.getElementById('letter-body');
-  letterEl.innerHTML = '<div class="letter-loading"><span></span><span></span><span></span></div>';
-
-  const family = familyData;
-  const fname = family.familyName || 'your family';
-  const children = (family.members || []).filter(m => m.role === 'child' && m.name);
-  const goal = family.familyGoal || '';
-  const now = new Date();
-  const weekStr = now.toLocaleDateString('en-GB', {day:'numeric', month:'long'});
-
-  // Count total recipes
-  let recipeCount = 0;
-  if (weekPlan) {
-    for (const day of Object.values(weekPlan)) {
-      recipeCount += Object.keys(day).length;
-    }
-  }
-
-  if (!ANTHROPIC_KEY) {
-    // Warm fallback letter
-    const childStr = children.length > 0
-      ? ` I've made sure there are meals this week that ${children[0].name} will want to try — and a few that might surprise them.`
-      : '';
-    letterEl.innerHTML = `
-      Dear ${fname},<br><br>
-      Here is your week — ${recipeCount} recipes, planned with your family in mind.${childStr}
-      ${goal ? `<br><br>I haven't forgotten your goal: <strong>${goal.substring(0,80)}${goal.length>80?'...':''}</strong>. This week's plan moves quietly in that direction.` : ''}
-      <br><br>
-      The shopping list is ready below. Everything organised by section — hand it to whoever is shopping and they'll know exactly what to get.
-      <br><br>
-      Tap any meal to see the full recipe. If something doesn't feel right for your family, tap <em>Swap</em> and I'll find an alternative.
-      <br><br>
-      Cook with joy this week. 🌿<br>
-      <strong>— Martin</strong>`;
-    return;
-  }
-
-  try {
-    // Build meal summary for the letter
-    let mealSummary = '';
-    if (weekPlan) {
-      const highlights = [];
-      for (const [dayIdx, day] of Object.entries(weekPlan)) {
-        if (day.Dinner) highlights.push(`${DAYS[dayIdx]} dinner: ${day.Dinner.title}`);
-      }
-      mealSummary = highlights.slice(0,4).join(', ');
-    }
-
-    const prompt = `You are Chef Martin Goldman. Write a warm, personal weekly letter to ${fname}.
-${children.length > 0 ? `Children: ${children.map(c=>c.name).join(', ')}` : ''}
-${goal ? `Family goal: ${goal}` : ''}
-Week of: ${weekStr}
-Dinner highlights this week: ${mealSummary || 'a variety of seasonal meals'}
-
-Write Martin's weekly letter — under 120 words, warm, personal, specific. Written in first person as Martin. Mention 1-2 specific meals from the highlights. Reference the family goal subtly. End with something encouraging. Use line breaks naturally. No bullet points. Sign as Martin.`;
-
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method:'POST',
-      headers:{
-        'Content-Type':'application/json',
-        'x-api-key': ANTHROPIC_KEY,
-        'anthropic-version':'2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true'
-      },
-      body: JSON.stringify({
-        model:'claude-sonnet-4-20250514',
-        max_tokens:250,
-        messages:[{role:'user',content:prompt}]
-      })
-    });
-
-    const data = await res.json();
-    const text = data.content?.[0]?.text || '';
-    letterEl.innerHTML = text.replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>');
-  } catch(e) {
-    letterEl.innerHTML = `Dear ${fname},<br><br>Your week is planned and ready. ${recipeCount} recipes, a shopping list organised by section, and a meal for every day. Tap any dish to see the full recipe — and tap Swap if anything doesn't suit your family.<br><br>Cook with joy. 🌿<br><strong>— Martin</strong>`;
-  }
-}
-
-// ═══════════════════════════════════════════
-// HELPERS
-// ═══════════════════════════════════════════
-function buildDietString() {
-  const allergies = (familyData.allergies || '').toLowerCase();
-  if (/vegan/.test(allergies)) return 'vegan';
-  if (/vegetarian/.test(allergies)) return 'vegetarian';
-  if (/gluten/.test(allergies)) return 'gluten free';
-  if (/dairy|lactose/.test(allergies)) return 'dairy free';
-  return '';
-}
-
-function buildExcludeString() {
-  const allergies = familyData.allergies || '';
-  const dislikes = familyData.dislikes || '';
-  const combined = allergies + ' ' + dislikes;
-  const excludes = [];
-  if (/nut/.test(combined.toLowerCase())) excludes.push('nuts','peanuts','almonds');
-  if (/mushroom/.test(combined.toLowerCase())) excludes.push('mushrooms');
-  if (/fish/.test(combined.toLowerCase())) excludes.push('fish','salmon','tuna');
-  return excludes.join(',');
-}
-
-function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
-
-function showToast(msg) {
-  document.querySelectorAll('.toast').forEach(t => t.remove());
-  const t = document.createElement('div');
-  t.className = 'toast'; t.textContent = msg;
-  document.body.appendChild(t);
-  setTimeout(() => t.remove(), 3000);
-}
+// Restore language preference
+const savedLang = localStorage.getItem('cm_lang');
+if (savedLang === 'es') setLang('es');
 </script>
-</body>
+
+<div id="martin-nav" style="position:fixed;bottom:16px;right:16px;z-index:200;display:flex;flex-direction:column;gap:6px;align-items:flex-end;"><a href="index.html" style="display:flex;align-items:center;gap:6px;background:rgba(30,61,40,0.92);border:1px solid rgba(192,138,24,0.2);border-radius:99px;padding:7px 14px;text-decoration:none;font-size:0.7rem;font-weight:600;color:rgba(255,255,255,0.7);">🌿 Home</a><a href="chef-martin-welcome.html" style="display:flex;align-items:center;gap:6px;background:rgba(30,61,40,0.92);border:1px solid rgba(192,138,24,0.2);border-radius:99px;padding:7px 14px;text-decoration:none;font-size:0.7rem;font-weight:600;color:rgba(255,255,255,0.7);">📋 Welcome</a><a href="chef-martin-voice-v3.html" style="display:flex;align-items:center;gap:6px;background:rgba(184,78,32,0.92);border:1px solid rgba(192,138,24,0.2);border-radius:99px;padding:7px 14px;text-decoration:none;font-size:0.7rem;font-weight:600;color:white;">🎙️ Talk to Martin</a></div></body>
 </html>

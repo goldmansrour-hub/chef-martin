@@ -35,16 +35,12 @@ body{
   min-height:100dvh;
 }
 
-/* Grain */
 body::before{
   content:'';position:fixed;inset:0;
   background-image:radial-gradient(circle,rgba(0,0,0,0.05) 1px,transparent 1px);
   background-size:5px 5px;pointer-events:none;z-index:0;mix-blend-mode:multiply;
 }
 
-/* ═══════════════════════════════
-   PROGRESS HEADER
-═══════════════════════════════ */
 .progress-header{
   position:sticky;top:0;z-index:100;
   background:linear-gradient(160deg,#0F1F14,#1E3D28);
@@ -80,16 +76,12 @@ body::before{
   width:0%;
 }
 
-/* ═══════════════════════════════
-   STEPS CONTAINER
-═══════════════════════════════ */
 .steps-wrap{
   max-width:560px;margin:0 auto;
   padding:28px 20px 60px;
   position:relative;z-index:1;
 }
 
-/* Individual step */
 .step{
   display:none;
   animation:stepIn 0.45s cubic-bezier(0.34,1.56,0.64,1) both;
@@ -100,7 +92,6 @@ body::before{
   to{opacity:1;transform:translateY(0) scale(1);}
 }
 
-/* Step header */
 .step-num{
   font-size:0.6rem;font-weight:700;letter-spacing:0.14em;
   text-transform:uppercase;color:var(--terra);margin-bottom:6px;
@@ -118,9 +109,6 @@ body::before{
 }
 .step-body strong{color:var(--ink);}
 
-/* ═══════════════════════════════
-   FORM ELEMENTS
-═══════════════════════════════ */
 .field{margin-bottom:16px;}
 .field-label{
   font-size:0.72rem;font-weight:700;
@@ -145,21 +133,14 @@ body::before{
   box-shadow:0 0 0 3px rgba(184,78,32,0.08);
 }
 .field-input::placeholder{color:rgba(84,96,110,0.38);}
-
-textarea.field-input{
-  resize:none;min-height:90px;line-height:1.6;
-}
-
+textarea.field-input{resize:none;min-height:90px;line-height:1.6;}
 select.field-input{cursor:pointer;appearance:none;
   background-image:url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 7L11 1' stroke='%2354606E' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
   background-repeat:no-repeat;background-position:right 14px center;
   padding-right:36px;
 }
 
-/* Radio/checkbox cards */
-.choice-grid{
-  display:grid;gap:8px;
-}
+.choice-grid{display:grid;gap:8px;}
 .choice-grid.cols-2{grid-template-columns:1fr 1fr;}
 .choice-grid.cols-1{grid-template-columns:1fr;}
 
@@ -175,9 +156,7 @@ select.field-input{cursor:pointer;appearance:none;
   border-color:var(--terra);background:var(--terra-p);
   box-shadow:0 0 0 3px rgba(184,78,32,0.08);
 }
-.choice-card.selected .choice-dot{
-  background:var(--terra);border-color:var(--terra);
-}
+.choice-card.selected .choice-dot{background:var(--terra);border-color:var(--terra);}
 .choice-card.selected .choice-dot::after{opacity:1;}
 .choice-dot{
   width:18px;height:18px;border-radius:50%;
@@ -192,19 +171,15 @@ select.field-input{cursor:pointer;appearance:none;
   opacity:0;transition:opacity 0.18s;
 }
 .choice-em{font-size:18px;flex-shrink:0;}
-.choice-text{}
 .choice-name{font-size:0.85rem;font-weight:600;color:var(--ink);}
 .choice-desc{font-size:0.7rem;color:var(--slate);margin-top:1px;line-height:1.4;}
 
-/* Multi-select (checkbox style) */
 .choice-card.multi.selected{
   border-color:var(--forest-m);background:var(--forest-p);
   box-shadow:0 0 0 3px rgba(30,61,40,0.07);
 }
 .choice-card.multi .choice-dot{border-radius:5px;}
-.choice-card.multi.selected .choice-dot{
-  background:var(--forest-m);border-color:var(--forest-m);
-}
+.choice-card.multi.selected .choice-dot{background:var(--forest-m);border-color:var(--forest-m);}
 .choice-card.multi.selected .choice-dot::after{
   content:'✓';font-size:10px;font-weight:700;
   background:transparent;color:white;
@@ -212,7 +187,6 @@ select.field-input{cursor:pointer;appearance:none;
   transform:translate(-50%,-52%);
 }
 
-/* Member row */
 .member-list{display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}
 .member-row{
   display:flex;gap:8px;align-items:center;
@@ -250,15 +224,12 @@ select.field-input{cursor:pointer;appearance:none;
 }
 .add-member-btn:hover{border-color:var(--terra);color:var(--terra);}
 
-/* Goal card */
 .goal-card{
   background:white;border:1.5px solid var(--border);
   border-radius:14px;padding:16px;
   margin-bottom:10px;position:relative;
 }
-.goal-card-header{
-  display:flex;align-items:center;gap:10px;margin-bottom:10px;
-}
+.goal-card-header{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
 .goal-av{
   width:32px;height:32px;border-radius:50%;
   background:linear-gradient(135deg,var(--forest),var(--forest-m));
@@ -267,13 +238,7 @@ select.field-input{cursor:pointer;appearance:none;
 }
 .goal-name{font-size:0.82rem;font-weight:600;color:var(--forest);}
 
-/* ═══════════════════════════════
-   NAVIGATION
-═══════════════════════════════ */
-.nav-row{
-  display:flex;gap:10px;margin-top:28px;
-  align-items:center;
-}
+.nav-row{display:flex;gap:10px;margin-top:28px;align-items:center;}
 .btn-next{
   flex:1;padding:15px;
   background:linear-gradient(135deg,var(--terra),var(--terra-l));
@@ -296,9 +261,6 @@ select.field-input{cursor:pointer;appearance:none;
 }
 .btn-back:hover{border-color:var(--terra);color:var(--terra);}
 
-/* ═══════════════════════════════
-   DIVIDER
-═══════════════════════════════ */
 .step-divider{
   height:1px;background:var(--border);
   margin:20px 0;position:relative;
@@ -312,9 +274,6 @@ select.field-input{cursor:pointer;appearance:none;
   white-space:nowrap;
 }
 
-/* ═══════════════════════════════
-   COMPLETION SCREEN
-═══════════════════════════════ */
 .completion{
   display:none;text-align:center;
   padding:40px 0;
@@ -338,16 +297,13 @@ select.field-input{cursor:pointer;appearance:none;
   line-height:1.75;margin-bottom:28px;max-width:400px;margin-left:auto;margin-right:auto;
 }
 
-/* Martin's personalised message */
 .martin-message{
   background:white;border:1.5px solid var(--border);
   border-radius:18px;padding:20px;
   text-align:left;margin-bottom:24px;
   box-shadow:var(--shadow);
 }
-.martin-msg-header{
-  display:flex;align-items:center;gap:10px;margin-bottom:12px;
-}
+.martin-msg-header{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
 .martin-msg-av{
   width:36px;height:36px;border-radius:50%;
   background:linear-gradient(135deg,var(--forest),var(--forest-m));
@@ -361,9 +317,7 @@ select.field-input{cursor:pointer;appearance:none;
   font-size:0.88rem;color:var(--ink);line-height:1.72;
   font-style:italic;
 }
-.martin-msg-loading{
-  display:flex;gap:5px;align-items:center;padding:4px 0;
-}
+.martin-msg-loading{display:flex;gap:5px;align-items:center;padding:4px 0;}
 .martin-msg-loading span{
   width:7px;height:7px;border-radius:50%;
   background:var(--slate);opacity:0.3;
@@ -373,22 +327,20 @@ select.field-input{cursor:pointer;appearance:none;
 .martin-msg-loading span:nth-child(3){animation-delay:0.36s;}
 @keyframes tdot{0%,60%,100%{transform:translateY(0);opacity:0.3;}30%{transform:translateY(-5px);opacity:1;}}
 
-.btn-voice{
+/* ── KEY CHANGE: this button now goes to PAYMENT ── */
+.btn-continue{
   display:flex;align-items:center;justify-content:center;gap:9px;
   width:100%;padding:15px;
-  background:linear-gradient(135deg,var(--forest),var(--forest-m));
+  background:linear-gradient(135deg,var(--terra),var(--terra-l));
   color:white;border:none;border-radius:12px;
   font-family:'Jost',sans-serif;font-size:0.95rem;font-weight:700;
   cursor:pointer;text-decoration:none;
-  box-shadow:0 5px 18px rgba(30,61,40,0.3);
+  box-shadow:0 5px 18px rgba(184,78,32,0.35);
   transition:all 0.2s;margin-bottom:10px;
   border-bottom:3px solid rgba(0,0,0,0.12);
 }
-.btn-voice:hover{transform:translateY(-2px);}
+.btn-continue:hover{transform:translateY(-2px);}
 
-/* ═══════════════════════════════
-   TOAST
-═══════════════════════════════ */
 .toast{
   position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
   background:var(--forest);color:white;
@@ -403,7 +355,6 @@ select.field-input{cursor:pointer;appearance:none;
 </head>
 <body>
 
-<!-- PROGRESS HEADER -->
 <div class="progress-header">
   <div class="ph-av">👨‍🍳</div>
   <div class="ph-info">
@@ -417,97 +368,62 @@ select.field-input{cursor:pointer;appearance:none;
 
 <div class="steps-wrap">
 
-  <!-- ═══════════════════════════════
-       STEP 1 — YOUR FAMILY
-  ═══════════════════════════════ -->
+  <!-- STEP 1 — YOUR FAMILY -->
   <div class="step active" id="step-1">
     <div class="step-num">Step 1 of 6 — The Family</div>
     <h2 class="step-title">Tell me about <em>your family.</em></h2>
     <p class="step-body">
       Martin remembers everything you share here — forever. Your family's names, ages, and who you are together. This is the foundation of every conversation you'll have.
     </p>
-
     <div class="field">
       <label class="field-label">Your family name</label>
       <input class="field-input" id="family-name" type="text" placeholder="e.g. The Johnsons, The Martínez family...">
       <div class="field-hint">Martin will use this to address your family warmly</div>
     </div>
-
     <div class="field">
       <label class="field-label">Who lives in your home?</label>
       <div class="member-list" id="member-list"></div>
       <button class="add-member-btn" onclick="addMember()">+ Add a family member</button>
       <div class="field-hint">Include everyone — parents, children, grandparents, whoever sits at your table</div>
     </div>
-
     <div class="field">
       <label class="field-label">Where are you based?</label>
       <input class="field-input" id="location" type="text" placeholder="City, Country">
       <div class="field-hint">Helps Martin understand seasonal produce and local ingredients available to you</div>
     </div>
-
     <div class="nav-row">
       <button class="btn-next" onclick="nextStep(1)">Continue →</button>
     </div>
   </div>
 
-  <!-- ═══════════════════════════════
-       STEP 2 — KITCHEN & HABITS
-  ═══════════════════════════════ -->
+  <!-- STEP 2 — KITCHEN & HABITS -->
   <div class="step" id="step-2">
     <div class="step-num">Step 2 of 6 — Your Kitchen</div>
     <h2 class="step-title">Your kitchen, <em>your reality.</em></h2>
     <p class="step-body">
       A great chef adapts to the kitchen they're working in. Tell Martin what you have — he'll never suggest a recipe that needs equipment you don't own.
     </p>
-
     <div class="field">
       <label class="field-label">How much time do you have for cooking on a typical weekday?</label>
       <div class="choice-grid cols-2">
-        <div class="choice-card" onclick="selectChoice(this,'time')">
-          <div class="choice-dot"></div>
-          <div class="choice-text">
-            <div class="choice-name">Under 20 min</div>
-            <div class="choice-desc">Quick & practical</div>
-          </div>
-        </div>
-        <div class="choice-card" onclick="selectChoice(this,'time')">
-          <div class="choice-dot"></div>
-          <div class="choice-text">
-            <div class="choice-name">20–40 min</div>
-            <div class="choice-desc">Comfortable pace</div>
-          </div>
-        </div>
-        <div class="choice-card" onclick="selectChoice(this,'time')">
-          <div class="choice-dot"></div>
-          <div class="choice-text">
-            <div class="choice-name">40–60 min</div>
-            <div class="choice-desc">I enjoy cooking</div>
-          </div>
-        </div>
-        <div class="choice-card" onclick="selectChoice(this,'time')">
-          <div class="choice-dot"></div>
-          <div class="choice-text">
-            <div class="choice-name">1 hour+</div>
-            <div class="choice-desc">Cooking is my time</div>
-          </div>
-        </div>
+        <div class="choice-card" onclick="selectChoice(this,'time')"><div class="choice-dot"></div><div class="choice-text"><div class="choice-name">Under 20 min</div><div class="choice-desc">Quick & practical</div></div></div>
+        <div class="choice-card" onclick="selectChoice(this,'time')"><div class="choice-dot"></div><div class="choice-text"><div class="choice-name">20–40 min</div><div class="choice-desc">Comfortable pace</div></div></div>
+        <div class="choice-card" onclick="selectChoice(this,'time')"><div class="choice-dot"></div><div class="choice-text"><div class="choice-name">40–60 min</div><div class="choice-desc">I enjoy cooking</div></div></div>
+        <div class="choice-card" onclick="selectChoice(this,'time')"><div class="choice-dot"></div><div class="choice-text"><div class="choice-name">1 hour+</div><div class="choice-desc">Cooking is my time</div></div></div>
       </div>
     </div>
-
     <div class="field">
       <label class="field-label">Weekly grocery budget (approximate)</label>
       <select class="field-input" id="budget">
         <option value="">Select your range...</option>
-        <option>Under €60/week</option>
-        <option>€60–100/week</option>
-        <option>€100–150/week</option>
-        <option>€150–200/week</option>
-        <option>Over €200/week</option>
+        <option>Under £60/week</option>
+        <option>£60–100/week</option>
+        <option>£100–150/week</option>
+        <option>£150–200/week</option>
+        <option>Over £200/week</option>
         <option>Flexible — quality first</option>
       </select>
     </div>
-
     <div class="field">
       <label class="field-label">Kitchen equipment you have <span style="font-weight:400;text-transform:none;font-size:0.68rem;">(select all that apply)</span></label>
       <div class="choice-grid cols-2">
@@ -521,99 +437,64 @@ select.field-input{cursor:pointer;appearance:none;
         <div class="choice-card multi" onclick="toggleMulti(this)"><span class="choice-em">🔥</span><div class="choice-dot"></div><div class="choice-name">BBQ / grill</div></div>
       </div>
     </div>
-
     <div class="nav-row">
       <button class="btn-back" onclick="prevStep(2)">←</button>
       <button class="btn-next" onclick="nextStep(2)">Continue →</button>
     </div>
   </div>
 
-  <!-- ═══════════════════════════════
-       STEP 3 — FOOD & HEALTH
-  ═══════════════════════════════ -->
+  <!-- STEP 3 — FOOD & HEALTH -->
   <div class="step" id="step-3">
     <div class="step-num">Step 3 of 6 — Food & Health</div>
     <h2 class="step-title">Allergies, dislikes, <em>and what matters.</em></h2>
     <p class="step-body">
       This is important. Martin needs to know what to avoid — always — and what your family genuinely can't stand. No judgement. Honest information here protects everyone.
     </p>
-
     <div class="field">
       <label class="field-label">Allergies or intolerances <span style="font-weight:400;text-transform:none;">(critical — list all)</span></label>
       <textarea class="field-input" id="allergies" placeholder="e.g. Nut allergy (Emma), lactose intolerance (Dad), gluten sensitivity (Mum)...&#10;&#10;Write 'None' if no allergies"></textarea>
     </div>
-
     <div class="field">
       <label class="field-label">Strong dislikes or foods the family refuses</label>
       <textarea class="field-input" id="dislikes" placeholder="e.g. Leo won't touch mushrooms, Dad dislikes fish, nobody likes courgette..."></textarea>
       <div class="field-hint">Be honest — Martin works with your family as it is, not as it should be</div>
     </div>
-
     <div class="field">
       <label class="field-label">Any current health considerations? <span style="font-weight:400;text-transform:none;">(optional but helpful)</span></label>
       <textarea class="field-input" id="health" placeholder="e.g. Type 2 diabetes (Dad), irregular digestion, low energy, skin issues, children's focus/mood concerns..."></textarea>
       <div class="field-hint">Martin guides, never prescribes. He'll always suggest speaking to your doctor for medical matters — but food context helps him guide you better</div>
     </div>
-
     <div class="field">
       <label class="field-label">How would you describe your family's current relationship with food?</label>
       <div class="choice-grid cols-1">
-        <div class="choice-card" onclick="selectChoice(this,'food-rel')">
-          <div class="choice-dot"></div>
-          <div class="choice-text">
-            <div class="choice-name">🌱 We want to eat better but don't know where to start</div>
-          </div>
-        </div>
-        <div class="choice-card" onclick="selectChoice(this,'food-rel')">
-          <div class="choice-dot"></div>
-          <div class="choice-text">
-            <div class="choice-name">⚡ We eat reasonably well but want more energy and less waste</div>
-          </div>
-        </div>
-        <div class="choice-card" onclick="selectChoice(this,'food-rel')">
-          <div class="choice-dot"></div>
-          <div class="choice-text">
-            <div class="choice-name">🔄 We've tried many things — we need something that actually sticks</div>
-          </div>
-        </div>
-        <div class="choice-card" onclick="selectChoice(this,'food-rel')">
-          <div class="choice-dot"></div>
-          <div class="choice-text">
-            <div class="choice-name">🍽️ Food is already important to us — we want to go deeper</div>
-          </div>
-        </div>
+        <div class="choice-card" onclick="selectChoice(this,'food-rel')"><div class="choice-dot"></div><div class="choice-text"><div class="choice-name">🌱 We want to eat better but don't know where to start</div></div></div>
+        <div class="choice-card" onclick="selectChoice(this,'food-rel')"><div class="choice-dot"></div><div class="choice-text"><div class="choice-name">⚡ We eat reasonably well but want more energy and less waste</div></div></div>
+        <div class="choice-card" onclick="selectChoice(this,'food-rel')"><div class="choice-dot"></div><div class="choice-text"><div class="choice-name">🔄 We've tried many things — we need something that actually sticks</div></div></div>
+        <div class="choice-card" onclick="selectChoice(this,'food-rel')"><div class="choice-dot"></div><div class="choice-text"><div class="choice-name">🍽️ Food is already important to us — we want to go deeper</div></div></div>
       </div>
     </div>
-
     <div class="nav-row">
       <button class="btn-back" onclick="prevStep(3)">←</button>
       <button class="btn-next" onclick="nextStep(3)">Continue →</button>
     </div>
   </div>
 
-  <!-- ═══════════════════════════════
-       STEP 4 — FAMILY GOALS
-  ═══════════════════════════════ -->
+  <!-- STEP 4 — FAMILY GOALS -->
   <div class="step" id="step-4">
     <div class="step-num">Step 4 of 6 — Your Goals</div>
     <h2 class="step-title">What does <em>better</em> look like?</h2>
     <p class="step-body">
       This is the most important step. When goals are clear, the path becomes clear. Martin needs to understand what you're actually trying to achieve — not what you think you should say.
     </p>
-
     <div class="field">
       <label class="field-label">The family's shared goal <span style="font-weight:400;text-transform:none;">(what you want to achieve together)</span></label>
       <textarea class="field-input" id="family-goal" placeholder="e.g. Eat real food most days without it feeling like a project. Get the children excited about vegetables. Reduce our grocery bill by 30% without sacrificing quality..."></textarea>
     </div>
-
     <div class="step-divider" data-label="Individual goals (optional but powerful)"></div>
-
     <p style="font-size:0.82rem;color:var(--slate);line-height:1.65;margin-bottom:16px;">
       Each person at the table has their own relationship with food. If any family members have specific goals, share them here — Martin will hold space for each one.
     </p>
-
     <div id="individual-goals"></div>
-
     <div class="field">
       <label class="field-label">What has stopped you before? <span style="font-weight:400;text-transform:none;">(honest answer)</span></label>
       <div class="choice-grid cols-1">
@@ -625,79 +506,54 @@ select.field-input{cursor:pointer;appearance:none;
         <div class="choice-card multi" onclick="toggleMulti(this)"><div class="choice-dot"></div><div class="choice-name">🌀 Overwhelm — too much conflicting information</div></div>
       </div>
     </div>
-
     <div class="nav-row">
       <button class="btn-back" onclick="prevStep(4)">←</button>
       <button class="btn-next" onclick="nextStep(4)">Continue →</button>
     </div>
   </div>
 
-  <!-- ═══════════════════════════════
-       STEP 5 — THE CHILDREN
-  ═══════════════════════════════ -->
+  <!-- STEP 5 — THE CHILDREN -->
   <div class="step" id="step-5">
     <div class="step-num">Step 5 of 6 — The Children</div>
     <h2 class="step-title">Tell Martin about <em>your children.</em></h2>
     <p class="step-body">
       If children eat well, the whole family follows. Martin has spent thirty years cooking for children — at Camphill, in schools, at Michelin tables where kids sat too. He knows children are not obstacles. They are the best teachers.
     </p>
-
-    <div id="children-section">
-      <!-- Populated dynamically from Step 1 members -->
-    </div>
-
+    <div id="children-section"></div>
     <div class="field" id="no-children-msg" style="display:none;">
       <div style="background:var(--forest-p);border:1px solid rgba(30,61,40,0.15);border-radius:12px;padding:14px 16px;font-size:0.85rem;color:var(--forest-m);line-height:1.6;">
         🌿 No children in your household — Martin noted. He'll focus entirely on the adults' journey. If that changes, just let him know.
       </div>
     </div>
-
     <div class="field">
       <label class="field-label">What's the biggest food challenge with your children? <span style="font-weight:400;text-transform:none;">(if applicable)</span></label>
       <div class="choice-grid cols-1">
-        <div class="choice-card" onclick="selectChoice(this,'child-challenge')">
-          <div class="choice-dot"></div><div class="choice-name">🥦 They refuse most vegetables</div>
-        </div>
-        <div class="choice-card" onclick="selectChoice(this,'child-challenge')">
-          <div class="choice-dot"></div><div class="choice-name">🍭 They prefer sweet/processed foods always</div>
-        </div>
-        <div class="choice-card" onclick="selectChoice(this,'child-challenge')">
-          <div class="choice-dot"></div><div class="choice-name">⚡ Energy crashes and mood after meals</div>
-        </div>
-        <div class="choice-card" onclick="selectChoice(this,'child-challenge')">
-          <div class="choice-dot"></div><div class="choice-name">😤 Mealtimes are battles, not rituals</div>
-        </div>
-        <div class="choice-card" onclick="selectChoice(this,'child-challenge')">
-          <div class="choice-dot"></div><div class="choice-name">🧠 Focus or mood concerns (school, behaviour)</div>
-        </div>
-        <div class="choice-card" onclick="selectChoice(this,'child-challenge')">
-          <div class="choice-dot"></div><div class="choice-name">✅ Children eat well — no major challenges</div>
-        </div>
+        <div class="choice-card" onclick="selectChoice(this,'child-challenge')"><div class="choice-dot"></div><div class="choice-name">🥦 They refuse most vegetables</div></div>
+        <div class="choice-card" onclick="selectChoice(this,'child-challenge')"><div class="choice-dot"></div><div class="choice-name">🍭 They prefer sweet/processed foods always</div></div>
+        <div class="choice-card" onclick="selectChoice(this,'child-challenge')"><div class="choice-dot"></div><div class="choice-name">⚡ Energy crashes and mood after meals</div></div>
+        <div class="choice-card" onclick="selectChoice(this,'child-challenge')"><div class="choice-dot"></div><div class="choice-name">😤 Mealtimes are battles, not rituals</div></div>
+        <div class="choice-card" onclick="selectChoice(this,'child-challenge')"><div class="choice-dot"></div><div class="choice-name">🧠 Focus or mood concerns (school, behaviour)</div></div>
+        <div class="choice-card" onclick="selectChoice(this,'child-challenge')"><div class="choice-dot"></div><div class="choice-name">✅ Children eat well — no major challenges</div></div>
       </div>
     </div>
-
     <div class="nav-row">
       <button class="btn-back" onclick="prevStep(5)">←</button>
       <button class="btn-next" onclick="nextStep(5)">Continue →</button>
     </div>
   </div>
 
-  <!-- ═══════════════════════════════
-       STEP 6 — THE FINAL WORD
-  ═══════════════════════════════ -->
+  <!-- STEP 6 — THE FINAL WORD -->
   <div class="step" id="step-6">
     <div class="step-num">Step 6 of 6 — Your Voice</div>
     <h2 class="step-title">Anything else Martin <em>should know?</em></h2>
     <p class="step-body">
       This is your space. Whatever you didn't find a field for — say it here. A detail about your mornings. A memory around food. Something you've never told a nutritionist. The thing that makes your family, your family.
     </p>
-
     <div class="field">
       <label class="field-label">Your free words to Martin</label>
       <textarea class="field-input" id="free-words" style="min-height:130px;"
         placeholder="Write whatever feels important. Martin reads every word before your first conversation. Nothing is too small or too personal..."></textarea>
     </div>
-
     <div class="field">
       <label class="field-label">How did you hear about Chef Martin?</label>
       <select class="field-input" id="how-heard">
@@ -709,38 +565,31 @@ select.field-input{cursor:pointer;appearance:none;
         <option>Other</option>
       </select>
     </div>
-
     <div class="field">
       <label class="field-label">Your email address</label>
-      <input class="field-input" id="email" type="email" placeholder="For Martin to follow up if needed">
+      <input class="field-input" id="email" type="email" placeholder="For your monthly recipe book and Martin to follow up">
     </div>
-
     <div style="background:var(--forest-p);border:1px solid rgba(30,61,40,0.15);border-radius:12px;padding:14px 16px;font-size:0.78rem;color:var(--forest-m);line-height:1.65;margin-bottom:4px;">
       🔒 Everything you've shared here belongs to your family. It lives in your browser, is never sold, and is only used to make Martin's guidance more personal and useful for you.
     </div>
-
     <div class="nav-row">
       <button class="btn-back" onclick="prevStep(6)">←</button>
-      <button class="btn-next" id="submit-btn" onclick="submitForm()">Meet Martin →</button>
+      <button class="btn-next" id="submit-btn" onclick="submitForm()">Save & Continue →</button>
     </div>
   </div>
 
-  <!-- ═══════════════════════════════
-       COMPLETION
-  ═══════════════════════════════ -->
+  <!-- COMPLETION -->
   <div class="completion" id="completion">
     <span class="comp-em">🌿</span>
-    <h2 class="comp-title" id="comp-title">Welcome to your family kitchen.</h2>
+    <h2 class="comp-title" id="comp-title">Martin knows your family.</h2>
     <p class="comp-body" id="comp-body">
-      Martin has read everything. He knows your family. Your first conversation starts where it matters — not from zero, but from understanding.
+      Perfect. Martin has read everything. Your first conversation starts from understanding, not from zero. One last step — start your free 2 weeks.
     </p>
 
     <div class="martin-message">
       <div class="martin-msg-header">
         <div class="martin-msg-av">👨‍🍳</div>
-        <div>
-          <div class="martin-msg-name">Chef Martin</div>
-        </div>
+        <div><div class="martin-msg-name">Chef Martin</div></div>
       </div>
       <div class="martin-msg-text" id="martin-welcome-text">
         <div class="martin-msg-loading">
@@ -749,29 +598,24 @@ select.field-input{cursor:pointer;appearance:none;
       </div>
     </div>
 
-    <a class="btn-voice" href="chef-martin-voice-v3.html">
-      🎙️ Talk to Martin now
+    <!-- ✅ KEY CHANGE: goes to payment, not voice -->
+    <a class="btn-continue" href="chef-martin-payment.html">
+      🌿 Start my free 2 weeks →
     </a>
 
     <div style="font-size:0.72rem;color:var(--slate);text-align:center;line-height:1.6;font-style:italic;">
-      Martin remembers this conversation forever.<br>Every time you speak, he builds on what he knows.
+      Your family profile is saved. Martin is ready.<br>No charge for 14 days — cancel anytime before then.
     </div>
   </div>
 
 </div>
 
 <script>
-// ═══════════════════════════════════════════
-// STATE
-// ═══════════════════════════════════════════
 let currentStep = 1;
 const totalSteps = 6;
 let members = [];
 let formData = {};
 
-// ═══════════════════════════════════════════
-// MEMBERS
-// ═══════════════════════════════════════════
 function addMember(name='', role='adult') {
   const id = Date.now();
   members.push({ id, name, role });
@@ -805,36 +649,20 @@ function updateMember(id, field, value) {
   if (m) m[field] = value;
 }
 
-// ═══════════════════════════════════════════
-// CHOICE CARDS
-// ═══════════════════════════════════════════
 function selectChoice(el, group) {
   document.querySelectorAll(`.choice-card:not(.multi)[onclick*="'${group}'"]`).forEach(c => c.classList.remove('selected'));
   el.classList.add('selected');
 }
 
-function toggleMulti(el) {
-  el.classList.toggle('selected');
-}
+function toggleMulti(el) { el.classList.toggle('selected'); }
 
-// ═══════════════════════════════════════════
-// NAVIGATION
-// ═══════════════════════════════════════════
 function nextStep(from) {
   if (from === 1) {
-    if (!document.getElementById('family-name').value.trim()) {
-      showToast('Please enter your family name 🌿');
-      return;
-    }
-    if (members.length === 0) {
-      showToast('Please add at least one family member');
-      return;
-    }
-    // Build individual goals and children sections
+    if (!document.getElementById('family-name').value.trim()) { showToast('Please enter your family name 🌿'); return; }
+    if (members.length === 0) { showToast('Please add at least one family member'); return; }
     buildGoalFields();
     buildChildrenSection();
   }
-
   if (from < totalSteps) {
     document.getElementById(`step-${from}`).classList.remove('active');
     currentStep = from + 1;
@@ -860,9 +688,6 @@ function updateProgress() {
   document.getElementById('ph-step').textContent = `Step ${currentStep} of ${totalSteps}`;
 }
 
-// ═══════════════════════════════════════════
-// DYNAMIC FIELDS
-// ═══════════════════════════════════════════
 function buildGoalFields() {
   const container = document.getElementById('individual-goals');
   const adults = members.filter(m => m.name && m.role !== 'child');
@@ -881,13 +706,11 @@ function buildGoalFields() {
 function buildChildrenSection() {
   const container = document.getElementById('children-section');
   const children = members.filter(m => m.role === 'child' && m.name);
-
   if (children.length === 0) {
     document.getElementById('no-children-msg').style.display = 'block';
     container.innerHTML = '';
     return;
   }
-
   document.getElementById('no-children-msg').style.display = 'none';
   container.innerHTML = children.map(c => `
     <div class="goal-card" style="margin-bottom:12px;">
@@ -904,137 +727,74 @@ function buildChildrenSection() {
   `).join('');
 }
 
-// ═══════════════════════════════════════════
-// SUBMIT
-// ═══════════════════════════════════════════
 async function submitForm() {
   const btn = document.getElementById('submit-btn');
   btn.textContent = 'Saving...';
   btn.disabled = true;
 
-  // Collect all data
   const equipment = [...document.querySelectorAll('.choice-card.multi.selected')]
     .map(el => el.querySelector('.choice-name')?.textContent).filter(Boolean);
-
   const obstacles = [...document.querySelectorAll('#step-4 .choice-card.multi.selected')]
     .map(el => el.querySelector('.choice-name')?.textContent).filter(Boolean);
-
   const timeChoice = document.querySelector('[onclick*="\'time\'"].selected .choice-name')?.textContent || '';
   const foodRel = document.querySelector('[onclick*="\'food-rel\'"].selected .choice-name')?.textContent || '';
   const childChallenge = document.querySelector('[onclick*="\'child-challenge\'"].selected .choice-name')?.textContent || '';
 
-  // Individual goals
-  const individualGoals = members
-    .filter(m => m.name && m.role !== 'child')
-    .map(m => ({
-      name: m.name,
-      role: m.role,
-      goal: document.getElementById(`goal-${m.id}`)?.value || ''
-    }));
-
-  // Children notes
-  const childrenNotes = members
-    .filter(m => m.role === 'child' && m.name)
-    .map(m => ({
-      name: m.name,
-      notes: document.getElementById(`child-${m.id}`)?.value || ''
-    }));
+  const individualGoals = members.filter(m => m.name && m.role !== 'child').map(m => ({
+    name: m.name, role: m.role,
+    goal: document.getElementById(`goal-${m.id}`)?.value || ''
+  }));
+  const childrenNotes = members.filter(m => m.role === 'child' && m.name).map(m => ({
+    name: m.name,
+    notes: document.getElementById(`child-${m.id}`)?.value || ''
+  }));
 
   formData = {
     familyName: document.getElementById('family-name').value.trim(),
     location: document.getElementById('location').value.trim(),
-    members,
-    cookingTime: timeChoice,
+    members, cookingTime: timeChoice,
     budget: document.getElementById('budget').value,
-    equipment,
-    allergies: document.getElementById('allergies').value.trim(),
+    equipment, allergies: document.getElementById('allergies').value.trim(),
     dislikes: document.getElementById('dislikes').value.trim(),
     health: document.getElementById('health').value.trim(),
     foodRelationship: foodRel,
     familyGoal: document.getElementById('family-goal').value.trim(),
-    individualGoals,
-    obstacles,
-    childChallenge,
-    childrenNotes,
+    individualGoals, obstacles, childChallenge, childrenNotes,
     freeWords: document.getElementById('free-words').value.trim(),
     email: document.getElementById('email').value.trim(),
     howHeard: document.getElementById('how-heard').value,
     submittedAt: new Date().toISOString()
   };
 
-  // Save to localStorage
   localStorage.setItem('chef-martin-family', JSON.stringify(formData));
 
-  // Show completion
+  // ── Send family data to n8n → Google Sheets BEFORE Stripe ──
+  try {
+    await fetch('https://food2well.app.n8n.cloud/webhook/martin-onboarding', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData)
+    });
+  } catch(e) {
+    console.warn('Onboarding webhook failed silently:', e);
+    // Never block the user — continue regardless
+  }
+
   document.getElementById(`step-6`).classList.remove('active');
   document.getElementById('completion').classList.add('show');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 
-  // Update completion text
-  const firstName = members[0]?.name || formData.familyName;
-  document.getElementById('comp-title').textContent = `Welcome, ${formData.familyName}.`;
-  document.getElementById('comp-body').textContent =
-    `Martin has everything he needs. Your first conversation starts from understanding, not from zero. He's been waiting to meet you.`;
-
-  // Generate Martin's personalised welcome
+  document.getElementById('comp-title').textContent = `Martin knows your family, ${formData.familyName}.`;
   generateWelcome(formData);
 }
 
 async function generateWelcome(data) {
-  const key = localStorage.getItem('cm_anthropic') || '';
   const textEl = document.getElementById('martin-welcome-text');
-
-  if (!key) {
-    // Fallback — warm but generic, still personalised with name
-    const children = data.members.filter(m => m.role === 'child').map(m => m.name);
-    const childStr = children.length > 0 ? ` and ${children.join(' and ')}` : '';
-    textEl.innerHTML = `"${data.familyName} — welcome. I've read everything. I know about your goal${data.familyGoal ? ' — ' + data.familyGoal.substring(0,60) + '...' : ''}. I know what's stopped you before. And I know that something brought you here today. Let's start from exactly where you are. Whenever you're ready, I'm listening."`;
-    return;
-  }
-
   const children = data.members.filter(m => m.role === 'child').map(m => m.name);
-  const adults = data.members.filter(m => m.role !== 'child').map(m => m.name);
-
-  const prompt = `You are Chef Martin Goldman. A family has just completed their welcome form. Write a warm, personal first message to greet them. Under 80 words. Personal, warm, specific to their details. No bullet points. Speak directly to them as if you just read their story.
-
-Family: ${data.familyName}
-Location: ${data.location}
-Adults: ${adults.join(', ')}
-Children: ${children.join(', ') || 'none'}
-Family goal: ${data.familyGoal}
-Main obstacle: ${data.obstacles?.[0] || 'not specified'}
-Health notes: ${data.health || 'none shared'}
-Free words: ${data.freeWords || 'none'}
-Food relationship: ${data.foodRelationship}
-
-Write only the message — warm, direct, personal. Start with their family name.`;
-
-  try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method:'POST',
-      headers:{
-        'Content-Type':'application/json',
-        'x-api-key': key,
-        'anthropic-version':'2023-06-01'
-      },
-      body: JSON.stringify({
-        model:'claude-sonnet-4-20250514',
-        max_tokens:200,
-        messages:[{role:'user',content:prompt}]
-      })
-    });
-    const d = await res.json();
-    const text = d.content?.[0]?.text || '';
-    textEl.innerHTML = `"${text}"`;
-  } catch(e) {
-    const children2 = data.members.filter(m => m.role === 'child').map(m => m.name);
-    textEl.innerHTML = `"${data.familyName} — I've read every word. ${children2.length > 0 ? `I know about ${children2[0]} and the rest of your table. ` : ''}Your goal is clear to me. I know what's stood in the way before. This time we go together — one step, one meal, one discovery at a time. Whenever you're ready, I'm here."`;
-  }
+  const childStr = children.length > 0 ? ` I can already see ${children.join(' and ')} at the table.` : '';
+  textEl.innerHTML = `"${data.familyName} — I've read every word.${childStr} Your goal is clear to me, and I know what's stood in the way before. This time we go together — one step, one meal, one discovery at a time. One last thing before we begin: let's get your free 2 weeks sorted."`;
 }
 
-// ═══════════════════════════════════════════
-// TOAST
-// ═══════════════════════════════════════════
 function showToast(msg) {
   document.querySelectorAll('.toast').forEach(t => t.remove());
   const t = document.createElement('div');
@@ -1043,14 +803,16 @@ function showToast(msg) {
   setTimeout(() => t.remove(), 3000);
 }
 
-// ═══════════════════════════════════════════
-// INIT — add two default members
-// ═══════════════════════════════════════════
 window.onload = () => {
   addMember('', 'parent');
   addMember('', 'parent');
   updateProgress();
 };
 </script>
-<div id="martin-nav" style="position:fixed;bottom:16px;right:16px;z-index:200;display:flex;flex-direction:column;gap:6px;align-items:flex-end;"><a href="index.html" style="display:flex;align-items:center;gap:6px;background:rgba(30,61,40,0.92);border:1px solid rgba(192,138,24,0.2);border-radius:99px;padding:7px 14px;text-decoration:none;font-size:0.7rem;font-weight:600;color:rgba(255,255,255,0.7);">🌿 Home</a><a href="chef-martin-welcome.html" style="display:flex;align-items:center;gap:6px;background:rgba(30,61,40,0.92);border:1px solid rgba(192,138,24,0.2);border-radius:99px;padding:7px 14px;text-decoration:none;font-size:0.7rem;font-weight:600;color:rgba(255,255,255,0.7);">📋 Welcome</a><a href="chef-martin-voice-v3.html" style="display:flex;align-items:center;gap:6px;background:rgba(184,78,32,0.92);border:1px solid rgba(192,138,24,0.2);border-radius:99px;padding:7px 14px;text-decoration:none;font-size:0.7rem;font-weight:600;color:white;">🎙️ Talk to Martin</a></div></body>
+
+<div id="martin-nav" style="position:fixed;bottom:16px;right:16px;z-index:200;display:flex;flex-direction:column;gap:6px;align-items:flex-end;">
+  <a href="chef-martin-landing.html" style="display:flex;align-items:center;gap:6px;background:rgba(30,61,40,0.92);border:1px solid rgba(192,138,24,0.2);border-radius:99px;padding:7px 14px;text-decoration:none;font-size:0.7rem;font-weight:600;color:rgba(255,255,255,0.7);">🌿 Home</a>
+  <a href="chef-martin-payment.html" style="display:flex;align-items:center;gap:6px;background:rgba(184,78,32,0.92);border:1px solid rgba(192,138,24,0.2);border-radius:99px;padding:7px 14px;text-decoration:none;font-size:0.7rem;font-weight:600;color:white;">🌿 Start free 2 weeks</a>
+</div>
+</body>
 </html>

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chef Martin — Start Your Free 2 Weeks</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:     #15100C;
+  --cream:   #F6F0E2;
+  --warm:    #FBF7EE;
+  --parch:   #EDE4CC;
+  --terra:   #B84E20;
+  --terra-l: #D96A38;
+  --terra-p: rgba(184,78,32,0.07);
+  --forest:  #1E3D28;
+  --forest-m:#2E6040;
+  --forest-p:rgba(30,61,40,0.07);
+  --gold:    #C08A18;
+  --gold-l:  #E0A820;
+  --slate:   #54606E;
+  --border:  rgba(184,78,32,0.14);
+  --shadow:  0 4px 28px rgba(21,16,12,0.10);
+  --shadow-l:0 16px 56px rgba(21,16,12,0.16);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Jost',sans-serif;
+  background:var(--cream);color:var(--ink);
+  min-height:100dvh;
+}
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:radial-gradient(circle,rgba(0,0,0,0.04) 1px,transparent 1px);
+  background-size:5px 5px;pointer-events:none;z-index:0;mix-blend-mode:multiply;
+}
+
+/* HEADER */
+.header{
+  background:linear-gradient(160deg,#0F1F14,#1E3D28,#0A1410);
+  padding:16px 20px;
+  display:flex;align-items:center;gap:12px;
+  position:relative;z-index:10;
+}
+.header::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(192,138,24,0.35),transparent);
+}
+.hdr-av{
+  width:40px;height:40px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,#2E6040,#1E3D28);
+  border:1.5px solid rgba(192,138,24,0.3);
+  display:flex;align-items:center;justify-content:center;font-size:20px;
+}
+.hdr-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1rem;font-weight:600;font-style:italic;color:white;
+}
+.hdr-sub{font-size:0.6rem;color:rgba(255,255,255,0.35);letter-spacing:0.08em;margin-top:1px;}
+
+/* MAIN */
+.main{
+  max-width:480px;margin:0 auto;
+  padding:32px 20px 80px;
+  position:relative;z-index:1;
+}
+
+/* OFFER CARD */
+.offer-card{
+  background:linear-gradient(160deg,#0F1F14,#1A3020);
+  border:1.5px solid rgba(192,138,24,0.2);
+  border-radius:20px;padding:24px;
+  text-align:center;margin-bottom:20px;
+  box-shadow:var(--shadow-l);
+  position:relative;overflow:hidden;
+}
+.offer-card::before{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle,rgba(255,255,255,0.4) 1px,transparent 1px);
+  background-size:18px 18px;opacity:0.07;pointer-events:none;
+}
+.offer-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  background:rgba(192,138,24,0.15);
+  border:1px solid rgba(192,138,24,0.3);
+  border-radius:99px;padding:5px 14px;
+  font-size:0.62rem;font-weight:700;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--gold-l);margin-bottom:16px;
+}
+.offer-price-free{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.8rem,10vw,4rem);
+  font-weight:700;color:white;
+  line-height:1;display:block;margin-bottom:4px;
+}
+.offer-price-sub{
+  font-size:0.82rem;color:rgba(255,255,255,0.5);
+  margin-bottom:16px;
+}
+.offer-price-sub strong{color:var(--gold-l);}
+.offer-divider{
+  height:1px;background:rgba(255,255,255,0.08);
+  margin:16px 0;
+}
+.offer-includes{
+  display:flex;flex-direction:column;gap:7px;
+  text-align:left;
+}
+.offer-inc-row{
+  display:flex;align-items:center;gap:8px;
+  font-size:0.78rem;color:rgba(255,255,255,0.6);
+}
+.offer-inc-row .check{color:var(--gold-l);font-size:12px;flex-shrink:0;}
+.offer-lock{
+  display:inline-flex;align-items:center;gap:5px;
+  background:rgba(192,138,24,0.1);
+  border:1px solid rgba(192,138,24,0.2);
+  border-radius:99px;padding:4px 12px;
+  font-size:0.62rem;color:var(--gold-l);
+  font-weight:600;letter-spacing:0.06em;
+  margin-top:14px;
+}
+
+/* FAMILY SUMMARY */
+.family-summary{
+  background:white;border:1.5px solid var(--border);
+  border-radius:14px;padding:16px;
+  margin-bottom:20px;box-shadow:var(--shadow);
+  display:none;
+}
+.family-summary.show{display:block;}
+.fs-title{
+  font-size:0.65rem;font-weight:700;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--forest-m);margin-bottom:10px;
+}
+.fs-row{
+  display:flex;align-items:center;gap:8px;
+  font-size:0.82rem;color:var(--slate);
+  padding:4px 0;
+}
+.fs-row strong{color:var(--ink);}
+
+/* PAYMENT FORM */
+.payment-card{
+  background:white;border:1.5px solid var(--border);
+  border-radius:18px;padding:22px;
+  box-shadow:var(--shadow);margin-bottom:16px;
+}
+.payment-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.2rem;font-weight:700;font-style:italic;
+  color:var(--forest);margin-bottom:4px;
+}
+.payment-sub{
+  font-size:0.78rem;color:var(--slate);
+  margin-bottom:18px;line-height:1.5;
+}
+
+.pay-btn{
+  width:100%;padding:16px;
+  background:linear-gradient(135deg,var(--terra),var(--terra-l));
+  color:white;border:none;border-radius:12px;
+  font-family:'Jost',sans-serif;font-size:1rem;font-weight:700;
+  cursor:pointer;letter-spacing:0.04em;
+  box-shadow:0 5px 18px rgba(184,78,32,0.35);
+  transition:all 0.2s;
+  border-bottom:3px solid rgba(0,0,0,0.12);
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  text-decoration:none;
+}
+.pay-btn:hover{transform:translateY(-2px);}
+
+.security-note{
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  font-size:0.68rem;color:rgba(84,96,110,0.5);
+  margin-top:10px;
+}
+
+/* TRUST SIGNALS */
+.trust-row{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;}
+.trust-item{
+  flex:1;min-width:120px;
+  background:white;border:1.5px solid var(--border);
+  border-radius:12px;padding:11px 12px;
+  text-align:center;box-shadow:0 2px 8px rgba(21,16,12,0.05);
+}
+.trust-em{font-size:20px;display:block;margin-bottom:4px;}
+.trust-text{font-size:0.68rem;color:var(--slate);line-height:1.4;}
+.trust-text strong{color:var(--ink);display:block;font-size:0.72rem;}
+
+/* SUCCESS */
+.success-screen{
+  display:none;text-align:center;padding:40px 0;
+}
+.success-screen.show{display:block;animation:fadeUp 0.5s ease both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.success-em{font-size:64px;display:block;margin-bottom:16px;}
+.success-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.6rem,5vw,2.2rem);
+  font-weight:700;font-style:italic;
+  color:var(--forest);margin-bottom:10px;
+}
+.success-body{
+  font-size:0.88rem;color:var(--slate);
+  line-height:1.75;margin-bottom:24px;
+}
+
+.btn-whatsapp{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  width:100%;padding:18px;
+  background:linear-gradient(135deg,#25D366,#1DA851);
+  color:white;border:none;border-radius:12px;
+  font-family:'Jost',sans-serif;font-size:1.05rem;font-weight:700;
+  cursor:pointer;text-decoration:none;
+  box-shadow:0 5px 20px rgba(37,211,102,0.4);
+  transition:all 0.2s;margin-bottom:10px;
+  border-bottom:3px solid rgba(0,0,0,0.12);
+  letter-spacing:0.02em;
+}
+.btn-whatsapp:hover{transform:translateY(-2px);}
+
+.btn-voice{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;padding:14px;
+  background:linear-gradient(135deg,var(--forest),var(--forest-m));
+  color:white;border:none;border-radius:12px;
+  font-family:'Jost',sans-serif;font-size:0.92rem;font-weight:600;
+  cursor:pointer;text-decoration:none;
+  box-shadow:0 5px 18px rgba(30,61,40,0.3);
+  transition:all 0.2s;
+  border-bottom:3px solid rgba(0,0,0,0.12);
+}
+.btn-voice:hover{transform:translateY(-2px);}
+
+/* NAV */
+#martin-nav{position:fixed;bottom:16px;right:16px;z-index:200;display:flex;flex-direction:column;gap:6px;align-items:flex-end;}
+#martin-nav a{display:flex;align-items:center;gap:6px;background:rgba(30,61,40,0.92);border:1px solid rgba(192,138,24,0.2);border-radius:99px;padding:7px 14px;text-decoration:none;font-size:0.7rem;font-weight:600;color:rgba(255,255,255,0.7);}
+#martin-nav a.active{background:rgba(184,78,32,0.92);color:white;}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="hdr-av">👨‍🍳</div>
+  <div>
+    <div class="hdr-name">Chef Martin — Founding Family</div>
+    <div class="hdr-sub">Secure checkout · Powered by Stripe</div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- OFFER -->
+  <div class="offer-card">
+    <div class="offer-badge">🌿 Founding Family Rate</div>
+    <span class="offer-price-free">FREE</span>
+    <div class="offer-price-sub">First 15 days — then <strong>£12/month after</strong></div>
+    <div class="offer-divider"></div>
+    <div class="offer-includes">
+      <div class="offer-inc-row"><span class="check">✓</span> Unlimited conversations with Chef Martin on WhatsApp</div>
+      <div class="offer-inc-row"><span class="check">✓</span> Voice access — Martin speaks to your whole family</div>
+      <div class="offer-inc-row"><span class="check">✓</span> Weekly meal planner & smart shopping lists</div>
+      <div class="offer-inc-row"><span class="check">✓</span> Pantry manager & zero waste planning</div>
+      <div class="offer-inc-row"><span class="check">✓</span> Kids Kitchen Adventure games</div>
+      <div class="offer-inc-row"><span class="check">✓</span> Monthly seasonal recipe collection</div>
+      <div class="offer-inc-row"><span class="check">✓</span> Monthly family voice session with Martin</div>
+    </div>
+    <div class="offer-lock">🔒 Your £12/month rate locked forever</div>
+  </div>
+
+  <!-- FAMILY SUMMARY (from welcome form) -->
+  <div class="family-summary" id="family-summary">
+    <div class="fs-title">Your family — ready for Martin</div>
+    <div id="family-summary-content"></div>
+  </div>
+
+  <!-- TRUST -->
+  <div class="trust-row">
+    <div class="trust-item">
+      <span class="trust-em">🛡️</span>
+      <div class="trust-text"><strong>No charge today</strong>Card held, not charged for 15 days</div>
+    </div>
+    <div class="trust-item">
+      <span class="trust-em">✋</span>
+      <div class="trust-text"><strong>Cancel anytime</strong>No contracts, no questions</div>
+    </div>
+    <div class="trust-item">
+      <span class="trust-em">🔒</span>
+      <div class="trust-text"><strong>Secure</strong>256-bit SSL via Stripe</div>
+    </div>
+  </div>
+
+  <!-- PAYMENT FORM -->
+  <div class="payment-card" id="payment-form-wrap">
+    <div class="payment-title">Start your free 2 weeks</div>
+    <div class="payment-sub">You'll be taken to Stripe's secure checkout. Your card is <strong>not charged</strong> for 15 days. Cancel before then — no questions asked.</div>
+
+    <a href="https://buy.stripe.com/cNicN7gIxc6Y6ZvaFnes005" class="pay-btn">
+      <span>🌿</span> Start my free 15 days — £12/month after
+    </a>
+
+    <div class="security-note">
+      🔒 Secured by Stripe · No charge for 15 days · Cancel anytime
+    </div>
+  </div>
+
+  <!-- SUCCESS (shown after Stripe return or test) -->
+  <div class="success-screen" id="success-screen">
+    <span class="success-em">🌿</span>
+    <h2 class="success-title" id="success-title">Welcome to the family.</h2>
+    <p class="success-body">
+      Your free 2 weeks have started. Martin already knows your family.<br>
+      Your card will not be charged until day 15.<br><br>
+      <strong>Say hello to Martin on WhatsApp now →</strong>
+    </p>
+
+    <a href="https://wa.me/17282331133" class="btn-whatsapp" target="_blank">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.096.539 4.067 1.485 5.782L0 24l6.387-1.463A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.894a9.878 9.878 0 01-5.031-1.378l-.36-.214-3.733.855.887-3.638-.235-.374A9.859 9.859 0 012.107 12C2.107 6.527 6.527 2.107 12 2.107c5.474 0 9.893 4.42 9.893 9.893 0 5.474-4.419 9.894-9.893 9.894z"/></svg>
+      Message Martin on WhatsApp
+    </a>
+
+    <a href="chef-martin-voice-v3.html" class="btn-voice">
+      🎙️ Or talk to Martin with your voice
+    </a>
+
+    <div style="font-size:0.7rem;color:var(--slate);text-align:center;margin-top:14px;line-height:1.7;font-style:italic;">
+      Martin already knows your family from your welcome form.<br>
+      Just say hello — he'll take it from there.
+    </div>
+  </div>
+
+  <!-- MARTIN'S GUARANTEE -->
+  <div style="background:var(--forest);border-radius:14px;padding:18px;margin-top:8px;position:relative;z-index:1;">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:0.95rem;font-style:italic;color:rgba(255,255,255,0.7);line-height:1.75;border-left:3px solid var(--gold);padding-left:14px;">
+      "If after 15 days you haven't saved more than you spent, I'll refund you personally. No questions asked."
+    </div>
+    <div style="font-size:0.65rem;color:rgba(255,255,255,0.3);margin-top:10px;letter-spacing:0.08em;text-transform:uppercase;">— Martin Goldman · Chef · Father of four</div>
+  </div>
+
+</div>
+
+<!-- NAV -->
+<div id="martin-nav">
+  <a href="chef-martin-landing.html">🌿 Home</a>
+  <a href="chef-martin-welcome.html">📋 Welcome form</a>
+  <a href="chef-martin-voice-v3.html">🎙️ Talk to Martin</a>
+</div>
+
+<script>
+// Load family summary from welcome form localStorage
+function loadFamilySummary() {
+  const data = JSON.parse(localStorage.getItem('chef-martin-family') || '{}');
+  if (!data.familyName) return;
+
+  const summary = document.getElementById('family-summary');
+  const content = document.getElementById('family-summary-content');
+  const children = (data.members || []).filter(m => m.role === 'child' && m.name);
+  const adults   = (data.members || []).filter(m => m.role !== 'child' && m.name);
+
+  content.innerHTML = `
+    <div class="fs-row">👨‍👩‍👧‍👦 <strong>${data.familyName}</strong>${data.location ? ' · ' + data.location : ''}</div>
+    ${adults.length   ? `<div class="fs-row">👤 ${adults.map(m=>m.name).join(', ')}</div>` : ''}
+    ${children.length ? `<div class="fs-row">🧒 ${children.map(m=>m.name).join(', ')}</div>` : ''}
+    ${data.familyGoal ? `<div class="fs-row" style="font-style:italic;">🎯 "${data.familyGoal.substring(0,80)}${data.familyGoal.length>80?'...':''}"</div>` : ''}
+  `;
+  summary.classList.add('show');
+}
+
+// Check if returning from Stripe with ?success=true
+function checkStripeReturn() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('success') === 'true') {
+    document.getElementById('payment-form-wrap').style.display = 'none';
+    const data = JSON.parse(localStorage.getItem('chef-martin-family') || '{}');
+    const name = data.familyName || 'family';
+    document.getElementById('success-title').textContent = `Welcome, ${name}. Your 2 weeks have started.`;
+    document.getElementById('success-screen').classList.add('show');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+window.onload = () => {
+  loadFamilySummary();
+  checkStripeReturn();
+};
+</script>
+</body>
+</html>

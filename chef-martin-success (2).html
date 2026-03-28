@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome to the table — Chef Martin</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Jost:wght@300;400;500;600&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --ink: #1C1A17;
+    --cream: #FAF6EE;
+    --terra: #B84E20;
+    --gold: #C9943A;
+    --forest: #2C4A35;
+    --sage: #8A9E82;
+  }
+
+  body {
+    background: var(--forest);
+    color: var(--cream);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1.5rem;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 20%, rgba(201,148,58,0.12) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(184,78,32,0.1) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .particle {
+    position: fixed;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: 0;
+    animation: float-up 4s ease-in infinite;
+    pointer-events: none;
+  }
+
+  @keyframes float-up {
+    0%   { opacity: 0; transform: translateY(100vh) scale(0); }
+    20%  { opacity: 0.6; }
+    80%  { opacity: 0.3; }
+    100% { opacity: 0; transform: translateY(-20px) scale(1); }
+  }
+
+  .card {
+    background: rgba(250,246,238,0.06);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(201,148,58,0.2);
+    border-radius: 24px;
+    padding: 3rem 2.5rem;
+    max-width: 520px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    animation: card-in 0.8s cubic-bezier(0.16,1,0.3,1) both;
+  }
+
+  @keyframes card-in {
+    from { opacity: 0; transform: translateY(30px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .success-icon {
+    width: 80px; height: 80px;
+    background: rgba(201,148,58,0.15);
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem;
+    margin: 0 auto 2rem;
+    animation: pulse-gold 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-gold {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(201,148,58,0.3); }
+    50%       { box-shadow: 0 0 0 16px rgba(201,148,58,0); }
+  }
+
+  .tag {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: white;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+  }
+
+  h1 em { font-style: italic; color: var(--gold); }
+
+  .subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-style: italic;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+
+  .divider {
+    width: 50px; height: 2px;
+    background: var(--gold);
+    margin: 0 auto 2rem;
+    border-radius: 2px;
+  }
+
+  /* ── MARTIN BUBBLE ── */
+  .wa-bubble {
+    background: white;
+    color: var(--ink);
+    border-radius: 18px 18px 18px 4px;
+    padding: 1.25rem 1.5rem;
+    text-align: left;
+    margin-bottom: 1.5rem;
+    animation: bubble-in 0.5s cubic-bezier(0.16,1,0.3,1) 0.4s both;
+    opacity: 0;
+  }
+
+  @keyframes bubble-in {
+    from { opacity: 0; transform: translateY(10px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .bubble-name {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--forest);
+    margin-bottom: 0.4rem;
+  }
+
+  .bubble-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  /* ── WHAT'S COMING ── */
+  .coming-list {
+    background: rgba(44,74,53,0.5);
+    border: 1px solid rgba(138,158,130,0.25);
+    border-radius: 14px;
+    padding: 1.25rem 1.5rem;
+    text-align: left;
+    margin-bottom: 1.75rem;
+  }
+
+  .coming-title {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 0.75rem;
+  }
+
+  .coming-item {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.75);
+    padding: 0.35rem 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    line-height: 1.5;
+  }
+
+  /* ── WHATSAPP BUTTON ── */
+  .btn-whatsapp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    width: 100%;
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    padding: 1.1rem 2rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    transition: all 0.25s;
+    margin-bottom: 0.75rem;
+    animation: btn-appear 0.5s ease 1s both;
+    opacity: 0;
+  }
+
+  @keyframes btn-appear {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .btn-whatsapp:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,211,102,0.35); }
+
+  .wa-icon { width: 22px; height: 22px; fill: white; flex-shrink: 0; }
+
+  .privacy-note {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.3);
+    text-align: center;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .manage-link {
+    font-size: 0.68rem;
+    color: rgba(255,255,255,0.25);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .manage-link:hover { color: rgba(255,255,255,0.5); }
+
+  .handwritten {
+    font-family: 'Caveat', cursive;
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    line-height: 1.6;
+    margin-top: 1.5rem;
+    animation: fade-in 0.5s ease 1.8s both;
+    opacity: 0;
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+</style>
+</head>
+<body>
+
+<script>
+  for (let i = 0; i < 12; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.animationDelay = Math.random() * 4 + 's';
+    p.style.animationDuration = (3 + Math.random() * 3) + 's';
+    p.style.width = p.style.height = (2 + Math.random() * 4) + 'px';
+    document.body.appendChild(p);
+  }
+</script>
+
+<div class="card">
+
+  <div class="success-icon">🌿</div>
+  <span class="tag">Payment confirmed</span>
+  <h1>Welcome to<br>the <em>table.</em></h1>
+  <p class="subtitle" id="subtitle-text">Your 15-day free trial begins today.<br>Martin is ready — he's been looking forward to meeting you.</p>
+  <div class="divider"></div>
+
+  <div class="wa-bubble">
+    <div class="bubble-name">🌿 Chef Martin</div>
+    <div class="bubble-text" id="martin-preview">
+      "I've read everything about your family. Your kitchen and I are about to become good friends. Say hello when you're ready 🌿"
+    </div>
+  </div>
+
+  <div class="coming-list">
+    <div class="coming-title">📋 What happens next</div>
+    <div class="coming-item">📸 <span>Send a photo → fridge scan, ingredients, recipe ideas — Martin sees everything</span></div>
+    <div class="coming-item">📅 <span>Every <strong>Wednesday</strong> — your personalised weekly meal plan arrives on WhatsApp</span></div>
+    <div class="coming-item">🛒 <span>Every <strong>Saturday</strong> — your shopping list + beautiful PDF to your inbox</span></div>
+    <div class="coming-item">📖 <span>Every <strong>month</strong> — your family cookbook, beautifully compiled</span></div>
+    <div class="coming-item">💬 <span><strong>Anytime</strong> — ask Martin anything. He's always here.</span></div>
+  </div>
+
+  <a class="btn-whatsapp" id="wa-btn" href="https://wa.me/17282331133?text=Hola%20Martin%2C%20ya%20estamos%20listos%20%F0%9F%8C%BF" target="_blank">
+    <svg class="wa-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+    Say hello to Martin 🌿
+  </a>
+
+  <p class="privacy-note">Your number is only used to connect you with Martin.<br>Never shared. Never marketed to.</p>
+
+  <a class="manage-link" href="https://billing.stripe.com/p/login/bJe28tdwldb2erX14Nes001" target="_blank">Manage or cancel your subscription →</a>
+
+  <p class="handwritten">"Every beginning deserves a proper welcome."</p>
+
+</div>
+
+<script>
+  // Personalise with family name if stored
+  try {
+    const stored = localStorage.getItem('chef-martin-family');
+    if (stored) {
+      const data = JSON.parse(stored);
+      const name = data.familyName || '';
+      if (name) {
+        document.getElementById('subtitle-text').innerHTML =
+          `Your 15-day free trial begins today, ${name}.<br>Martin is ready — he's been looking forward to meeting you.`;
+        document.getElementById('martin-preview').innerHTML =
+          `"I've read everything about the ${name} family. Your kitchen and I are about to become good friends. Say hello when you're ready 🌿"`;
+        // Pre-fill WhatsApp message with family name
+        const msg = encodeURIComponent(`Hola Martin, somos la familia ${name} — ¡ya estamos listos! 🌿`);
+        document.getElementById('wa-btn').href = `https://wa.me/17282331133?text=${msg}`;
+      }
+    }
+  } catch(e) {}
+</script>
+
+</body>
+</html>
